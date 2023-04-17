@@ -1,0 +1,60 @@
+main{
+    min-height: 80vh;
+    background-color: #F5F5F5;
+}
+
+h1{
+    font-size: 1.8rem;
+    padding: 1rem 0;
+}
+
+h3{
+    padding: 1.4rem 0 ; 
+    padding: 0.5rem 0;
+}
+
+.rating span{
+    margin: 0.1rem;
+}
+
+.carousel img {
+    display: block;
+    height: 300px;
+    padding:30px;
+    margin: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel a {
+    margin: 0 auto; 
+}
+
+
+/* .active, .dot:hover {
+    background-color: black ;
+} */
+
+.prev:hover, .next:hover {
+    background-color: none;
+  }
+  
+
+@media (max-width: 900px) {
+    .carousel-caption h2 {
+        font-style: 2.5vw;
+    }
+}
+
+
+
+.no-gutters-row {
+    margin-right: 0;
+    margin-left: 0;
+}
+  
+.no-gutters-col {
+    padding-right: 0;
+    padding-left: 0;
+}
