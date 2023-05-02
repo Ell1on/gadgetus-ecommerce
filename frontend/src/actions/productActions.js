@@ -342,26 +342,26 @@ export const listCategoriesDetails = (id) => async(dispatch) => {
 
 export const listProductByCategoriesDetails = (cat) => async(dispatch) => {
     try{
-        dispatch({type:PRODUCT_BY_CATEGORY_REQUEST})
-
-        const {data} = await axios.get(
-            `/api/categories/categorylist/${cat.id}/?category=${cat.category}&sort=${cat.sort}`,
-            );
-
-        dispatch({
-            type: PRODUCT_BY_CATEGORY_SUCCESS,
-            payload: data
-        })
-
+      const { id, category, sort, filter, price } = cat;
+      const queryParams = new URLSearchParams({
+        category: category,
+        sort: sort,
+        filter: JSON.stringify(filter),
+        price: price
+        // price: JSON.stringify(price),
+      }).toString();
+      dispatch({type:PRODUCT_BY_CATEGORY_REQUEST})
+      const { data } = await axios.get(
+        `/api/categories/categorylist/${id}/?${queryParams}`
+      )
+      dispatch({ type: PRODUCT_BY_CATEGORY_SUCCESS, payload: data })
     }catch(error){
-        dispatch({
-            type: PRODUCT_BY_CATEGORY_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
-                : error.message,
-        })
+      dispatch({
+        type: PRODUCT_BY_CATEGORY_FAIL,
+        payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+      })
     }
-}
+  }
 
 export const listTopCategories = () => async(dispatch) => {
 

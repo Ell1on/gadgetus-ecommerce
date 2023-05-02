@@ -144,6 +144,11 @@ import {
     PRODUCT_NUMREVIEWS_FAIL,
     PRODUCT_NUMREVIEWS_RESET,
 
+    PRODUCT_FILTER_REQUEST,
+    PRODUCT_FILTER_SUCCESS,
+    PRODUCT_FILTER_FAIL,
+    PRODUCT_FILTER_RESET,
+
 
 } from '../constants/productConstants';
 
@@ -212,12 +217,8 @@ export const productDetailsReducers = (state = {product: {reviews: []}}, action)
 
         default:
             return state
-
-
     }
 }
-
-
 
 export const BrandDetailsReducers = (state = {brand: {}}, action) => {
     switch(action.type){
@@ -381,12 +382,10 @@ export const productCategoryReducers = (state = { }, action) => {
         case PRODUCT_CATEGORY_RESET:
             return {}
     
-
         default:
             return state
     }
 }
-
 
 export const productUpdateReducers = (state = {product:{}}, action) => {
     switch(action.type){
@@ -401,11 +400,8 @@ export const productUpdateReducers = (state = {product:{}}, action) => {
 
         case PRODUCT_UPDATE_RESET:
             return { product: {} }
-    
-
         default:
             return state
-
 
     }
 }
@@ -413,7 +409,6 @@ export const productUpdateReducers = (state = {product:{}}, action) => {
 export const productSetBrandReducers = (state = {brand:{}}, action) => {
     switch(action.type){
 
-    
         case PRODUCT_BRAND_SET_REQUEST:
             return {loading:true}
             
@@ -426,18 +421,13 @@ export const productSetBrandReducers = (state = {brand:{}}, action) => {
         case PRODUCT_BRAND_SET_RESET:
             return { brand: {} }
     
-
         default:
             return state
-
-
     }
 }
 
 export const productSetCategoryReducers = (state = {category:{}}, action) => {
     switch(action.type){
-
-    
         case PRODUCT_CATEGORY_SET_REQUEST:
             return {loading:true}
             
@@ -450,11 +440,8 @@ export const productSetCategoryReducers = (state = {category:{}}, action) => {
         case PRODUCT_CATEGORY_SET_RESET:
             return { category: {} }
     
-
         default:
             return state
-
-
     }
 }
 
@@ -471,15 +458,11 @@ export const productUpdateBrandReducers = (state = {brand:{}}, action) => {
 
         case PRODUCT_BRAND_UPDATE_RESET:
             return { product: {} }
-    
 
         default:
             return state
-
-
     }
 }
-
 
 export const topCategoriesReducers = (state = {category: []}, action) => {
     switch(action.type){
@@ -499,10 +482,7 @@ export const topCategoriesReducers = (state = {category: []}, action) => {
         default:
             return state
     }
-
-
 }
-
 
 export const productUpdateCategoryReducers = (state = {category:{}}, action) => {
     switch(action.type){
@@ -525,9 +505,6 @@ export const productUpdateCategoryReducers = (state = {category:{}}, action) => 
 
     }
 }
-
-
-
 
 export const productReviewReducers = (state = { }, action) => {
     switch(action.type){

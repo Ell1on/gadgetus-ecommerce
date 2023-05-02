@@ -3,14 +3,13 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
 from django.contrib.auth.models import User
-
 from base.models import Product, Review, ProductInfo, OrderItem, Brand, Category
-
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, BrandSerializer, CategorySerializer
-
 from rest_framework import status
+import json
+from django.db.models import Q
+
 
 @api_view(['GET'])
 def getCategories(request):
@@ -73,19 +72,50 @@ def updateCategory(request, pk):
 @api_view(['GET'])
 def getProductByCategory(request, pk):
     category = Category.objects.get(_id=pk)
-    sort = sort = request.GET.get('sort')
-    print(f"sort: {sort}")
-    if sort == 'reviews':
-        products = Product.objects.filter(categories=category).order_by('-rating')
-    elif sort == 'highPrice':
-        products = Product.objects.filter(categories=category).order_by('-price')
-    elif sort == 'lowPrice':
-        products = Product.objects.filter(categories=category).order_by('price')
-    elif sort == 'numReviews':
-        products =Product.objects.filter(categories=category).order_by('-numReviews')
+    sort = request.GET.get('sort')
+    filters = request.GET.get('filter')
+    price = request.GET.get('price')
+
+    price_list = price.split(',') if price else []
+    if len(price_list) < 2:
+        # присваиваем значения по умолчанию, если отсутствует одно или оба значения
+        min_price, max_price = 0, float('inf')
     else:
-        products = Product.objects.filter(categories=category)
-        
+        min_price, max_price = map(float, price_list)
+
+    prods = Product.objects.filter(categories=category, price__gte=min_price, price__lte=max_price)
+
+    if filters:
+        try:
+            filters_list = json.loads(filters)
+
+            for f in filters_list:
+                prods = prods.filter(productinfo__title=f['title'], productinfo__information=f['info'])
+                #  price__gte=f['minPrice'], price__lte=f['maxPrice'])
+
+            serializer = ProductSerializer(prods, many=True)
+            print(f"filters{filters_list}")
+
+            return Response(serializer.data)
+
+        except json.JSONDecodeError as e:
+            # Обработка ошибки декодирования JSON
+            print(f"Ошибка декодирования JSON: {e}")
+            filters_list = []
+    else:
+        filters_list = []
+
+    if sort == 'reviews':
+        products = prods.order_by('-rating')
+    elif sort == 'highPrice':
+        products = prods.order_by('-price')
+    elif sort == 'lowPrice':
+        products = prods.order_by('price')
+    elif sort == 'numReviews':
+        products = prods.order_by('-numReviews')
+    else:
+        products = prods
+
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
