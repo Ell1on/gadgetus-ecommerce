@@ -30,7 +30,19 @@ import { productListReducers,
     productReviewsReducers,
     productHighPriceReducers,
     productLowPriceReducers,
-    productNumReviewsReducers
+    productNumReviewsReducers,
+    productSectionListReducers,
+    productSubsectionListReducers,
+    sectionDeleteReducers,
+    subsectionDeleteReducers,
+    productUpdateSectionReducers,
+    productUpdateSubsectionReducers,
+    sectionDetailsReducers,
+    subsectionDetailsReducers,
+    productSetSectionReducers,
+    productSetSubsectionReducers,
+    productSectionReducers,
+    productSubsectionReducers
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer } from './reducers/userReducers';
@@ -72,6 +84,27 @@ const reducer = combineReducers({
     productSetCategory: productSetCategoryReducers,
     productByCategory: productByCategoryReducers,
     topCategories:topCategoriesReducers,
+
+
+    productSectionList: productSectionListReducers,
+    productSubsectionList: productSubsectionListReducers,
+
+    productSection: productSectionReducers,
+    productSubsection: productSubsectionReducers,
+    sectionDelete: sectionDeleteReducers,
+    subsectionDelete: subsectionDeleteReducers,
+    productUpdateSection: productUpdateSectionReducers,
+    productUpdateSubsection: productUpdateSubsectionReducers,
+    sectionDetails: sectionDetailsReducers,
+    subsectionDetails: subsectionDetailsReducers,
+    productSetSection: productSetSectionReducers,
+    productSetSubsection: productSetSubsectionReducers,
+
+
+
+
+
+
     // productReviews: productReviewsReducers,
     // productHighPrice: productHighPriceReducers,
     // productLowPrice: productLowPriceReducers,

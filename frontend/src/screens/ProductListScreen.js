@@ -90,6 +90,8 @@ function ProductListScreens() {
                                 <th>NAME</th>
                                 <th>PRICE</th>
                                 <th>CATEGORY</th>
+                                <th>SECTION</th>
+                                <th>SUBSECTION</th>
                                 <th>BRAND</th>
                                 <th></th>
                             </tr>
@@ -102,6 +104,8 @@ function ProductListScreens() {
                                 <td>{product.name}</td>
                                 <td>${product.price}</td>
                                 <td>{product?.categories}</td>
+                                <td>{product?.sections}</td>
+                                <td>{product?.subsections}</td>
                                 <td>{product?.brands}</td>
 
                                 <td>

@@ -21,6 +21,8 @@ urlpatterns = [
     path('update/<str:pk>/', views.updateProduct, name="product-update"),
     path('update/<int:pk>/brand/<int:pk_alt>/', views.setProductBrand, name="set-brand"),
     path('update/<int:pk>/category/<int:pk_alt>/', views.setProductCategory, name="set-category"),
+    path('update/<int:pk>/section/<int:pk_alt>/', views.setProductSection, name="set-section"),
+    path('update/<int:pk>/subsection/<int:pk_alt>/', views.setProductSubsection, name="set-subsection"),
 
     path('delete/<str:pk>/', views.deleteProduct, name="product-delete"),
     path('delete/<str:pk>/info/delete/<str:pk_alt>/', views.deleteInfo, name="product-delete"),

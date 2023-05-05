@@ -265,6 +265,32 @@ def setProductCategory(request, pk, pk_alt):
 
     return Response(serializers.data)
 
+@api_view(['PUT'])
+def setProductSection(request, pk, pk_alt):
+
+    data = request.data
+    print(f"data: {data}")
+    product = Product.objects.get(_id=pk)
+    product.sections = data['section']
+    product.save()
+    serializers = ProductSerializer(product, many=False)
+
+    return Response(serializers.data)
+
+
+@api_view(['PUT'])
+def setProductSubsection(request, pk, pk_alt):
+
+    data = request.data
+    print(f"data: {data}")
+    product = Product.objects.get(_id=pk)
+    product.subsections = data['subsection']
+    product.save()
+    serializers = ProductSerializer(product, many=False)
+
+    return Response(serializers.data)
+
+
 
 # @api_view(['GET'])
 # def getSortProdByRating(request):

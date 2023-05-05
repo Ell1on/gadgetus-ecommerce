@@ -85,6 +85,8 @@ function ProductScreen({}) {
     ))
   }
 
+  console.log(product);
+
   const submitInfoHandler = (e) => {
     e.preventDefault()
     

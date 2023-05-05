@@ -3,13 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import {Row, Col, Form, Button, Dropdown ,Hidden } from 'react-bootstrap'
+import {Row, Col, Form, Button ,Hidden } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
 import SearchBox from './../screens/SearchBox';
 import { listProductsBrands, listProductsCategories, listProductByCategoriesDetails } from '../actions/productActions';
-import { Link } from 'react-router-dom';
+import "../index.css"; // подключаем стили
+
 
 
 function Header() {
@@ -27,6 +28,9 @@ function Header() {
   const productBrandsList = useSelector(state => state.productBrandsList) 
   const {loading:loadingBrands, error:errorBrands,brands} = productBrandsList
 
+  const productList = useSelector(state => state.productList) 
+  const {loading, error, products} = productList
+
   console.log(categories);
 
 
@@ -34,7 +38,6 @@ function Header() {
       dispatch(listProductsCategories())
       dispatch(listProductsBrands())
   }, [dispatch, ])
-  
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -50,6 +53,48 @@ function Header() {
   };
   console.log(selectedCategory);
 
+  const catas = { categories: {} };
+products?.map((product) => {
+  const { categories, sections, subsections } = product;
+  if (catas?.categories[categories]) {
+    if (!catas?.categories[categories]?.sections?.includes(sections)) {
+      catas?.categories[categories]?.sections?.push(sections);
+    }
+    if (Array.isArray(subsections)) { // add a check to ensure subsections is an array
+      catas.categories[categories].subsections = [
+        ...new Set([
+          ...catas?.categories[categories]?.subsections,
+          ...subsections
+        ])
+      ];
+    }
+  } else {
+    catas.categories[categories] = {
+      sections: [sections],
+      subsections: Array.isArray(subsections) ? subsections : [] // add a check to ensure subsections is an array
+    };
+  }
+});
+  
+  // const generateItems = (categories) => {
+  //   const items = [];
+  //   for (const category in categories) {
+  //     const categoryObj = { label: category, items: [] };
+  //     for (const section of categories[category].sections) {
+  //       const sectionObj = { label: section, items: [] };
+  //       for (const subsection of categories[category].subsections) {
+  //         sectionObj.items.push({ label: subsection });
+  //       }
+  //       categoryObj.items.push(sectionObj);
+  //     }
+  //     items.push(categoryObj);
+  //   }
+  //   return items;
+  // }
+
+  // const items = [{ label: 'Catalog', items: [generateItems(catas.categories)] }];
+
+
   return (
     <header>
   <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
@@ -60,7 +105,9 @@ function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav " style={{zIndex:99999}}>
         <Nav className="me-auto">
-          <NavDropdown title="Catalog" id="basic-nav-dropdown">
+
+
+          {/* <NavDropdown title="Catalog" id="basic-nav-dropdown">
             {categories?.map((category) => (
               <LinkContainer
                 to={`/admin/categories/categorylist/${category._id}`}
@@ -74,6 +121,14 @@ function Header() {
               </LinkContainer>
             ))}
           </NavDropdown>
+          <div className="card">
+            <MegaMenu model={items} breakpoint="960px" />
+        </div> */}
+
+
+
+
+
         </Nav>
         <SearchBox className="flex-grow-1" />
         <Nav>
@@ -121,6 +176,12 @@ function Header() {
               </LinkContainer>
               <LinkContainer to="/admin/categories">
                 <NavDropdown.Item>Categories</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/sections">
+                <NavDropdown.Item>Sections</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/subsections">
+                <NavDropdown.Item>Subsections</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
           )}

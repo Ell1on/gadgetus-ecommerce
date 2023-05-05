@@ -129,25 +129,66 @@ import {
     PRODUCT_RATED_FAIL,
     PRODUCT_RATED_RESET,
 
-    PRODUCT_HIGHPRICE_REQUEST,
-    PRODUCT_HIGHPRICE_SUCCESS,
-    PRODUCT_HIGHPRICE_FAIL,
-    PRODUCT_HIGHPRICE_RESET,
+    PRODUCT_SECTION_SET_REQUEST,
+    PRODUCT_SECTION_SET_SUCCESS,
+    PRODUCT_SECTION_SET_FAIL,
+    PRODUCT_SECTION_SET_RESET,
+    PRODUCT_SECTION_REQUEST,
+    PRODUCT_SECTION_SUCCESS,
+    PRODUCT_SECTION_FAIL,
+    PRODUCT_SECTION_RESET,
+    PRODUCT_SECTION_DELETE_REQUEST,
+    PRODUCT_SECTION_DELETE_SUCCESS,
+    PRODUCT_SECTION_DELETE_FAIL,
+    PRODUCT_SECTION_DELETE_RESET,
+    PRODUCT_SECTION_UPDATE_REQUEST,
+    PRODUCT_SECTION_UPDATE_SUCCESS,
+    PRODUCT_SECTION_UPDATE_FAIL,
+    PRODUCT_SECTION_UPDATE_RESET,
+    PRODUCT_SECTION_DETAILS_REQUEST,
+    PRODUCT_SECTION_DETAILS_SUCCESS,
+    PRODUCT_SECTION_DETAILS_FAIL,
+    PRODUCT_SECTION_DETAILS_RESET,
+    PRODUCT_SECTION_LIST_REQUEST,
+    PRODUCT_SECTION_LIST_SUCCESS,
+    PRODUCT_SECTION_LIST_FAIL,
+    PRODUCT_SECTION_LIST_RESET,
 
-    PRODUCT_LOWPRICE_REQUEST,
-    PRODUCT_LOWPRICE_SUCCESS,
-    PRODUCT_LOWPRICE_FAIL,
-    PRODUCT_LOWPRICE_RESET,
 
-    PRODUCT_NUMREVIEWS_REQUEST,
-    PRODUCT_NUMREVIEWS_SUCCESS,
-    PRODUCT_NUMREVIEWS_FAIL,
-    PRODUCT_NUMREVIEWS_RESET,
 
-    PRODUCT_FILTER_REQUEST,
-    PRODUCT_FILTER_SUCCESS,
-    PRODUCT_FILTER_FAIL,
-    PRODUCT_FILTER_RESET,
+    PRODUCT_SUBSECTION_SET_REQUEST,
+    PRODUCT_SUBSECTION_SET_SUCCESS,
+    PRODUCT_SUBSECTION_SET_FAIL,
+    PRODUCT_SUBSECTION_SET_RESET,
+    PRODUCT_SUBSECTION_REQUEST,
+    PRODUCT_SUBSECTION_SUCCESS,
+    PRODUCT_SUBSECTION_FAIL,
+    PRODUCT_SUBSECTION_RESET,
+    PRODUCT_SUBSECTION_DELETE_REQUEST,
+    PRODUCT_SUBSECTION_DELETE_SUCCESS,
+    PRODUCT_SUBSECTION_DELETE_FAIL,
+    PRODUCT_SUBSECTION_DELETE_RESET,
+    PRODUCT_SUBSECTION_UPDATE_REQUEST,
+    PRODUCT_SUBSECTION_UPDATE_SUCCESS,
+    PRODUCT_SUBSECTION_UPDATE_FAIL,
+    PRODUCT_SUBSECTION_UPDATE_RESET,
+    PRODUCT_SUBSECTION_DETAILS_REQUEST,
+    PRODUCT_SUBSECTION_DETAILS_SUCCESS,
+    PRODUCT_SUBSECTION_DETAILS_FAIL,
+    PRODUCT_SUBSECTION_DETAILS_RESET,
+    PRODUCT_SUBSECTION_LIST_REQUEST,
+    PRODUCT_SUBSECTION_LIST_SUCCESS,
+    PRODUCT_SUBSECTION_LIST_FAIL,
+    PRODUCT_SUBSECTION_LIST_RESET,
+
+    PRODUCT_BY_SECTION_REQUEST,
+    PRODUCT_BY_SECTION_SUCCESS,
+    PRODUCT_BY_SECTION_FAIL,
+
+    PRODUCT_BY_SUBSECTION_REQUEST,
+    PRODUCT_BY_SUBSECTION_SUCCESS,
+    PRODUCT_BY_SUBSECTION_FAIL,
+
 
 
 } from '../constants/productConstants';
@@ -193,6 +234,41 @@ export const productCategoryListReducers = (state = {category: []}, action) => {
             return {loading:false, categories:action.payload}
 
         case PRODUCT_CATEGORY_LIST_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+export const productSectionListReducers = (state = {section: []}, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_LIST_REQUEST:
+            return {loading:true, sections:[]}
+            
+        case PRODUCT_SECTION_LIST_SUCCESS:
+            return {loading:false, sections:action.payload}
+
+        case PRODUCT_SECTION_LIST_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const productSubsectionListReducers = (state = {subsection: []}, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_LIST_REQUEST:
+            return {loading:true, subsections:[]}
+            
+        case PRODUCT_SUBSECTION_LIST_SUCCESS:
+            return {loading:false, subsections:action.payload}
+
+        case PRODUCT_SUBSECTION_LIST_FAIL:
             return {loading:false, error:action.payload}
 
         default:
@@ -256,6 +332,42 @@ export const categoryDetailsReducers = (state = {category: {}}, action) => {
     }
 }
 
+export const sectionDetailsReducers = (state = {section: {}}, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_DETAILS_REQUEST:
+            return {loading:true, ...state}
+            
+        case PRODUCT_SECTION_DETAILS_SUCCESS:
+            return {loading:false, section:action.payload}
+
+        case PRODUCT_SECTION_DETAILS_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const subsectionDetailsReducers = (state = {subsection: {}}, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_DETAILS_REQUEST:
+            return {loading:true, ...state}
+            
+        case PRODUCT_SUBSECTION_DETAILS_SUCCESS:
+            return {loading:false, subsection:action.payload}
+
+        case PRODUCT_SUBSECTION_DETAILS_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
 export const productByCategoryReducers = (state = {products: {}}, action) => {
     switch(action.type){
         case PRODUCT_BY_CATEGORY_REQUEST:
@@ -265,6 +377,43 @@ export const productByCategoryReducers = (state = {products: {}}, action) => {
             return {loading:false, products:action.payload}
 
         case PRODUCT_BY_CATEGORY_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+
+export const productBySectionReducers = (state = {products: {}}, action) => {
+    switch(action.type){
+        case PRODUCT_BY_SECTION_REQUEST:
+            return {loading:true, ...state}
+            
+        case PRODUCT_BY_SECTION_SUCCESS:
+            return {loading:false, products:action.payload}
+
+        case PRODUCT_BY_SECTION_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const productBySubSectionReducers = (state = {products: {}}, action) => {
+    switch(action.type){
+        case PRODUCT_BY_SUBSECTION_REQUEST:
+            return {loading:true, ...state}
+            
+        case PRODUCT_BY_SUBSECTION_SUCCESS:
+            return {loading:false, products:action.payload}
+
+        case PRODUCT_BY_SUBSECTION_FAIL:
             return {loading:false, error:action.payload}
 
         default:
@@ -319,6 +468,42 @@ export const categoryDeleteReducers = (state = { }, action) => {
             return {loading:false, success:true}
 
         case PRODUCT_CATEGORY_DELETE_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const sectionDeleteReducers = (state = { }, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_DELETE_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SECTION_DELETE_SUCCESS:
+            return {loading:false, success:true}
+
+        case PRODUCT_SECTION_DELETE_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const subsectionDeleteReducers = (state = { }, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_DELETE_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SUBSECTION_DELETE_SUCCESS:
+            return {loading:false, success:true}
+
+        case PRODUCT_SUBSECTION_DELETE_FAIL:
             return {loading:false, error:action.payload}
 
         default:
@@ -387,6 +572,44 @@ export const productCategoryReducers = (state = { }, action) => {
     }
 }
 
+export const productSectionReducers = (state = { }, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SECTION_SUCCESS:
+            return {loading:false, success:true, section:action.payload}
+
+        case PRODUCT_SECTION_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SECTION_RESET:
+            return {}
+    
+        default:
+            return state
+    }
+}
+
+export const productSubsectionReducers = (state = { }, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SUBSECTION_SUCCESS:
+            return {loading:false, success:true, subsection:action.payload}
+
+        case PRODUCT_SUBSECTION_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SUBSECTION_RESET:
+            return {}
+    
+        default:
+            return state
+    }
+}
+
 export const productUpdateReducers = (state = {product:{}}, action) => {
     switch(action.type){
         case PRODUCT_UPDATE_REQUEST:
@@ -445,6 +668,44 @@ export const productSetCategoryReducers = (state = {category:{}}, action) => {
     }
 }
 
+export const productSetSectionReducers = (state = {section:{}}, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_SET_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SECTION_SET_SUCCESS:
+            return {loading:false, success:true, value:action.payload}
+
+        case PRODUCT_SECTION_SET_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SECTION_SET_RESET:
+            return { section: {} }
+    
+        default:
+            return state
+    }
+}
+
+export const productSetSubsectionReducers = (state = {subsection:{}}, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_SET_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SUBSECTION_SET_SUCCESS:
+            return {loading:false, success:true, value:action.payload}
+
+        case PRODUCT_SUBSECTION_SET_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SUBSECTION_SET_RESET:
+            return { subsection: {} }
+    
+        default:
+            return state
+    }
+}
+
 export const productUpdateBrandReducers = (state = {brand:{}}, action) => {
     switch(action.type){
         case PRODUCT_BRAND_UPDATE_REQUEST:
@@ -496,6 +757,48 @@ export const productUpdateCategoryReducers = (state = {category:{}}, action) => 
             return {loading:false, error:action.payload}
 
         case PRODUCT_CATEGORY_UPDATE_RESET:
+            return { product: {} }
+    
+
+        default:
+            return state
+
+
+    }
+}
+
+export const productUpdateSectionReducers = (state = {section:{}}, action) => {
+    switch(action.type){
+        case PRODUCT_SECTION_UPDATE_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SECTION_UPDATE_SUCCESS:
+            return {loading:false, success:true, section:action.payload}
+
+        case PRODUCT_SECTION_UPDATE_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SECTION_UPDATE_RESET:
+            return { product: {} }
+    
+
+        default:
+            return state
+    }
+}
+
+export const productUpdateSubsectionReducers = (state = {subsection:{}}, action) => {
+    switch(action.type){
+        case PRODUCT_SUBSECTION_UPDATE_REQUEST:
+            return {loading:true}
+            
+        case PRODUCT_SUBSECTION_UPDATE_SUCCESS:
+            return {loading:false, success:true, subsection:action.payload}
+
+        case PRODUCT_SUBSECTION_UPDATE_FAIL:
+            return {loading:false, error:action.payload}
+
+        case PRODUCT_SUBSECTION_UPDATE_RESET:
             return { product: {} }
     
 

@@ -25,6 +25,10 @@ import CategoryListScreen from './screens/CategoryListScreen';
 import BrandEditScreen from './screens/BrandEditScreen';
 import CategoryEditScreen from './screens/CategoryEditScreen';
 import ProductByCategoryScreen from './screens/ProductByCategoryScreen';
+import SectionListScreens from './screens/SectionListScreen';
+import SectionEditScreen from './screens/SectionEditScreen';
+import SubsectionListScreens from './screens/SubsectionListScreen';
+import SubsectionEditScreen from './screens/SubsectionEditScreen';
 
 
 const App = () => {
@@ -136,6 +140,25 @@ const App = () => {
             <Route 
               path='/admin/categories/categorylist/:id'
               element= {<ProductByCategoryScreen/>} 
+            />
+
+            <Route 
+              path='/admin/sections'
+              element= {<SectionListScreens/>} 
+            />
+
+            <Route 
+              path='/admin/section/:id/edit'
+              element= {<SectionEditScreen/>} 
+            />
+            <Route 
+              path='/admin/subsections'
+              element= {<SubsectionListScreens/>} 
+            />
+
+            <Route 
+              path='/admin/subsection/:id/edit'
+              element= {<SubsectionEditScreen/>} 
             />
 
           </Routes>

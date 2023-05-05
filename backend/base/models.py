@@ -16,6 +16,8 @@ class Product(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     brands = models.CharField(max_length=200, null=True, blank=True) 
     categories = models.CharField(max_length=200, null=True, blank=True)
+    sections = models.CharField(max_length=200, null=True, blank=True)
+    subsections = models.CharField(max_length=200, null=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
@@ -37,11 +39,27 @@ class Brand(models.Model):
 
 class Category(models.Model):
     category = models.CharField(max_length=200)
+
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return self.category
 
+
+class Section(models.Model):
+    section = models.CharField(max_length=200)
+
+    _id = models.AutoField(primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.section
+    
+class Subsection(models.Model):
+    subsection = models.CharField(max_length=200)
+    _id = models.AutoField(primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.subsection
 
 class ProductInfo(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
