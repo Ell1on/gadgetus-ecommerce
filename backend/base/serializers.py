@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Product, Order, OrderItem, ShippingAddress, Review, ProductInfo, Brand, Category, ProductImage, Section, Subsection
+from .models import Product, Order, OrderItem, ShippingAddress, Review, ProductInfo, Brand, Category, ProductImage, Section
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.fields import ListField
 
@@ -59,8 +59,18 @@ class BrandSerializer(serializers.ModelSerializer):
         return {'id': brand._id, 'brand':brand.brand} if brand else '' 
     
     
+class SectionSerializer(serializers.ModelSerializer):
+    # brands = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Section
+        fields = '__all__'
+
+    
 class CategorySerializer(serializers.ModelSerializer):
     # brands = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    section = serializers.SerializerMethodField(read_only=True)
+
 
     class Meta:
         model = Category
@@ -69,28 +79,16 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_category(self, obj):
         category = obj.category_set.first()
         return {'id': category._id, 'category':category.category} if category else ''
-
-class SectionSerializer(serializers.ModelSerializer):
-    # brands = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-    class Meta:
-        model = Section
-        fields = '__all__'
-
-    def get_section(self, obj):
-        section = obj.section_set.first()
-        return {'id': section._id, 'section':section.section} if section else ''
     
-class SubsectionSerializer(serializers.ModelSerializer):
-    # brands = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    def get_section(self, obj):
+        section = obj.section_set.all()
+        serializers = SectionSerializer(section, many=True)
+        return serializers.data
+        # return {'id': section._id, 'section':section.section} if section else '' 
 
-    class Meta:
-        model = Subsection
-        fields = '__all__'
 
-    def get_subsection(self, obj):
-        subsection = obj.subsection_set.first()
-        return {'id': subsection._id, 'subsection':subsection.subsection} if subsection else ''
+    
+
  
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:

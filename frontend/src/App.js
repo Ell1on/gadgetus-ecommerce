@@ -25,10 +25,7 @@ import CategoryListScreen from './screens/CategoryListScreen';
 import BrandEditScreen from './screens/BrandEditScreen';
 import CategoryEditScreen from './screens/CategoryEditScreen';
 import ProductByCategoryScreen from './screens/ProductByCategoryScreen';
-import SectionListScreens from './screens/SectionListScreen';
-import SectionEditScreen from './screens/SectionEditScreen';
-import SubsectionListScreens from './screens/SubsectionListScreen';
-import SubsectionEditScreen from './screens/SubsectionEditScreen';
+
 
 
 const App = () => {
@@ -138,11 +135,11 @@ const App = () => {
               element= {<CategoryEditScreen/>} 
             />
             <Route 
-              path='/admin/categories/categorylist/:id'
+              path='/admin/categories/categorylist/:id/section/:_id'
               element= {<ProductByCategoryScreen/>} 
             />
 
-            <Route 
+            {/* <Route 
               path='/admin/sections'
               element= {<SectionListScreens/>} 
             />
@@ -159,7 +156,7 @@ const App = () => {
             <Route 
               path='/admin/subsection/:id/edit'
               element= {<SubsectionEditScreen/>} 
-            />
+            /> */}
 
           </Routes>
           

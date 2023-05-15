@@ -42,7 +42,8 @@ import { productListReducers,
     productSetSectionReducers,
     productSetSubsectionReducers,
     productSectionReducers,
-    productSubsectionReducers
+    productSubsectionReducers,
+    categoryUpdateSectionReducers
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer } from './reducers/userReducers';
@@ -84,6 +85,7 @@ const reducer = combineReducers({
     productSetCategory: productSetCategoryReducers,
     productByCategory: productByCategoryReducers,
     topCategories:topCategoriesReducers,
+    categoryUpdateSection: categoryUpdateSectionReducers,
 
 
     productSectionList: productSectionListReducers,
@@ -101,14 +103,6 @@ const reducer = combineReducers({
     productSetSubsection: productSetSubsectionReducers,
 
 
-
-
-
-
-    // productReviews: productReviewsReducers,
-    // productHighPrice: productHighPriceReducers,
-    // productLowPrice: productLowPriceReducers,
-    // productNumReviews: productNumReviewsReducers,
     cart: cartReducer,
     favorites: favoritesReducer,
     userLogin: userLoginReducer,

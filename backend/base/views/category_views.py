@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
-from base.models import Product, Review, ProductInfo, OrderItem, Brand, Category
+from base.models import Product, Review, ProductInfo, OrderItem, Brand, Category, Section
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, BrandSerializer, CategorySerializer
 from rest_framework import status
 import json
@@ -70,8 +70,11 @@ def updateCategory(request, pk):
 #     serializers = ProductSerializer(product, many=True)
 #     return Response(serializers.data)
 @api_view(['GET'])
-def getProductByCategory(request, pk):
+def getProductByCategory(request, pk, pk_alt):
     category = Category.objects.get(_id=pk)
+   
+    section = Section.objects.get(_id=pk_alt)
+    print(f"PKALT: {section}")
     sort = request.GET.get('sort')
     filters = request.GET.get('filter')
     price = request.GET.get('price')
@@ -83,7 +86,7 @@ def getProductByCategory(request, pk):
     else:
         min_price, max_price = map(float, price_list)
 
-    prods = Product.objects.filter(categories=category, price__gte=min_price, price__lte=max_price)
+    prods = Product.objects.filter(categories=category, subsections=section, price__gte=min_price, price__lte=max_price)
 
     if filters:
         try:
@@ -125,6 +128,41 @@ def getTopCategories(request, pk):
     
     serializers = CategorySerializer(categories, many=True)
     return Response(serializers.data)
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def createSection(request, pk):
+    print(f'PK^{pk}')
+    category = Category.objects.get(_id=pk)
+    section = Section.objects.create(
+        category=category,
+        section='',
+    )
+    return Response('Section created')
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateCategorySection(request, pk, pk_alt):
+    data = request.data
+    print(f"UPDATE CATSEC {pk}, {pk_alt}")
+    category = Category.objects.get(_id=pk)
+    section = Section.objects.get(_id=pk_alt, category=category)
+    new_sec = data['name']
+    section.section = new_sec
+    section.save()
+    # order.isDelivered = True
+    # order.deliveredAt = datetime.now()
+    # order.save()
+    return Response('section was added')
+
+# @api_view(['GET'])
+# def getSections(request):
+#     sections = Section.objects.all()
+    
+#     serializers = SectionSerializer(sections, many=True)
+#     return Response(serializers.data)
 
 
 

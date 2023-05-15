@@ -189,6 +189,11 @@ import {
     PRODUCT_BY_SUBSECTION_SUCCESS,
     PRODUCT_BY_SUBSECTION_FAIL,
 
+    PRODUCT_CATEGORY_SECTION_REQUEST,
+    PRODUCT_CATEGORY_SECTION_SUCCESS,
+    PRODUCT_CATEGORY_SECTION_FAIL,
+    PRODUCT_CATEGORY_SECTION_RESET,
+
 
 
 } from '../constants/productConstants';
@@ -572,24 +577,43 @@ export const productCategoryReducers = (state = { }, action) => {
     }
 }
 
-export const productSectionReducers = (state = { }, action) => {
+// export const productSectionReducers = (state = { }, action) => {
+//     switch(action.type){
+//         case PRODUCT_SECTION_REQUEST:
+//             return {loading:true}
+            
+//         case PRODUCT_SECTION_SUCCESS:
+//             return {loading:false, success:true, section:action.payload}
+
+//         case PRODUCT_SECTION_FAIL:
+//             return {loading:false, error:action.payload}
+
+//         case PRODUCT_SECTION_RESET:
+//             return {}
+    
+//         default:
+//             return state
+//     }
+// }
+
+export const productSectionReducers = (state = {}, action) => {
     switch(action.type){
         case PRODUCT_SECTION_REQUEST:
             return {loading:true}
             
         case PRODUCT_SECTION_SUCCESS:
-            return {loading:false, success:true, section:action.payload}
+            return {loading:false, success:true}
 
         case PRODUCT_SECTION_FAIL:
             return {loading:false, error:action.payload}
 
         case PRODUCT_SECTION_RESET:
-            return {}
-    
+            return { }
         default:
             return state
     }
 }
+
 
 export const productSubsectionReducers = (state = { }, action) => {
     switch(action.type){
@@ -864,6 +888,27 @@ export const productUpdateInfoReducers = (state = { inputValue: {}, inputInfo:{}
             return state;
     }
 };
+
+export const categoryUpdateSectionReducers = (state = { name: {} }, action) => {
+    switch (action.type) {
+        case PRODUCT_CATEGORY_SECTION_REQUEST:
+            return { loading: true };
+
+        case PRODUCT_CATEGORY_SECTION_SUCCESS:
+            return { loading: false, success: true, value: action.payload };
+
+        case PRODUCT_CATEGORY_SECTION_FAIL:
+            return { loading: false, error: action.payload };
+
+        case PRODUCT_CATEGORY_SECTION_RESET:
+            return { category: {} };
+
+        default:
+            return state;
+    }
+};
+
+
 
 export const productDeleteInfoReducers = (state = { }, action) => {
     switch(action.type){

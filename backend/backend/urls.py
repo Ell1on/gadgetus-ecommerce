@@ -45,8 +45,8 @@ urlpatterns = [
     path('api/orders/', include('base.urls.order_urls')),
     path('api/brands/', include('base.urls.brand_urls')),
     path('api/categories/', include('base.urls.category_urls')),
-    path('api/sections/', include('base.urls.section_urls')),
-    path('api/subsections/', include('base.urls.subsection_urls')),
+    # path('api/sections/', include('base.urls.section_urls')),
+    # path('api/subsections/', include('base.urls.subsection_urls')),
 
 
 ]

@@ -253,17 +253,18 @@ def setProductBrand(request, pk, pk_alt):
 
     return Response(serializers.data)
 
+import json
 @api_view(['PUT'])
 def setProductCategory(request, pk, pk_alt):
-
     data = request.data
-    print(f"data: {data}")
     product = Product.objects.get(_id=pk)
     product.categories = data['category']
+    # Преобразуем строку в список
+    # product.subsections = data['catSec']
+    # print(f"CATSEC: {product.subsections}")
     product.save()
-    serializers = ProductSerializer(product, many=False)
-
-    return Response(serializers.data)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
 
 @api_view(['PUT'])
 def setProductSection(request, pk, pk_alt):

@@ -42,7 +42,8 @@ function Filters(props) {
       };
       const submitHandler = () => {
         dispatch(listProductByCategoriesDetails({
-          id: props.id,
+          categoryId: props.id,
+          sectionId: props._id,
           filter: selectedInfo,
           price: range
         }));
@@ -72,7 +73,7 @@ function Filters(props) {
         }, [products]);
 
         useEffect(() => {
-          dispatch(listProductByCategoriesDetails({id:props.id}))
+          dispatch(listProductByCategoriesDetails({categoryId:props.id, sectionId:props._id}))
         }, [dispatch]);
       
         useEffect(() => {

@@ -21,7 +21,7 @@ function ProductEditScreen() {
     const [uploading, setUploading] = useState(false);
     const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
-    const [section, setSection] = useState('')
+    const [cats, setCats] = useState([])
     const [subsection, setSubsection] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
@@ -33,11 +33,8 @@ function ProductEditScreen() {
     const productCategoryList = useSelector(state => state.productCategoryList) 
     const {loading:loadingCat, error:errorCat,categories} = productCategoryList
 
-    const productSectionList = useSelector(state => state.productSectionList) 
-    const {loading:loadingSection, error:errorSection, sections} = productSectionList
-
     const productSubsectionList = useSelector(state => state.productSubsectionList) 
-    const {loading:loadingSub, error:errorSub, subsections} = productSubsectionList
+    const {loading:loadingS, error:errorS,subsections} = productSubsectionList
  
     const productDetails = useSelector(state => state.productDetails)
     const {error, loading, product} = productDetails
@@ -58,19 +55,12 @@ function ProductEditScreen() {
     const productBrandsList = useSelector(state => state.productBrandsList) 
     const {loading:loadingBrands, error:errorBrands,brands} = productBrandsList
 
-    
-
     const productSetBrand = useSelector(state => state.productSetBrand) 
     const {loading:loadingValue, error:errorValue, success:successValue, value} = productSetBrand 
 
     const productSetCategory = useSelector(state => state.productSetCategory) 
     const {loading:loadingValueCat, error:errorValueCat, success:successValueCat, valueCat} = productSetCategory 
 
-    const productSetSection = useSelector(state => state.productSetSection) 
-    const {loading:loadingValueSection, error:errorValueSection, success:successValueSection, valueSection} = productSetSection 
-
-    const productSetSubsection = useSelector(state => state.productSetSubsection) 
-    const {loading:loadingValueSubsection, error:errorValueSubsection, success:successValueSubsection, valueSubsection} = productSetSubsection 
 
     useEffect(() => {
         if (successProductInfo) {
@@ -95,8 +85,8 @@ function ProductEditScreen() {
           setDescription(product.description)
           setBrand(product.brands)
           setCategory(product.categories)
-          setSection(product.sections)
-          setSubsection(product.subsections)
+        //   setSection(product.sections)
+        //   setSubsection(product.subsections)
           
         }
       }, [dispatch, navigate, successProductInfo, successUpdate, product, id, successUpdateInfo, successDeleteInfo])
@@ -115,7 +105,9 @@ function ProductEditScreen() {
         }))
     }
 
-    // console.log(value);
+    const cat = categories?.filter((category) => category.category === cats)
+    console.log("ABOB", cat);
+    console.log("AMOGUS", category);
 
     const submitInfoHandler = (e) => {
         e.preventDefault(id)
@@ -168,33 +160,37 @@ function ProductEditScreen() {
 
     const handleCategoryChange = (event) => {
         const selectedCategory = event.target.value;
+        setCats(selectedCategory);
         const selectedId = event.target.selectedOptions[0].getAttribute("data-custom-1");
+        const cs = categories?.filter(category => category.category === selectedCategory)?.map(category => category?.section?.map(sec => sec.section)).reduce((acc, val) => acc.concat(val), [])
+        console.log(cs);
         console.log(category);
         console.log(id);
         dispatch(setProductCategory({
             _id:id,
             id: selectedId,
-            category: selectedCategory
+            category: selectedCategory,
+            catSec: cs
         }))
         console.log(selectedId)
         console.log(selectedCategory)
         console.log(product);
     };
 
-    const handleSectionChange = (event) => {
-        const selectedSection = event.target.value;
-        const selectedId = event.target.selectedOptions[0].getAttribute("data-custom-2");
-        console.log(section);
-        console.log(id);
-        dispatch(setProductSection({
-            _id:id,
-            id: selectedId,
-            section: selectedSection
-        }))
-        console.log(selectedId)
-        console.log(selectedSection)
-        console.log(product);
-    };
+    // const handleSectionChange = (event) => {
+    //     const selectedSection = event.target.value;
+    //     const selectedId = event.target.selectedOptions[0].getAttribute("data-custom-2");
+    //     console.log(section);
+    //     console.log(id);
+    //     dispatch(setProductSection({
+    //         _id:id,
+    //         id: selectedId,
+    //         section: selectedSection
+    //     }))
+    //     console.log(selectedId)
+    //     console.log(selectedSection)
+    //     console.log(product);
+    // };
 
     const handleSubsectionChange = (event) => {
         const selectedSubsection = event.target.value;
@@ -210,9 +206,6 @@ function ProductEditScreen() {
         console.log(selectedSubsection)
         console.log(product);
     };
-
-    console.log(sections);
-    console.log(subsections);
 
   return (
     <div>
@@ -328,7 +321,25 @@ function ProductEditScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId='section'>
+                    {/* <Form.Group controlId='section'>
+                        <Form.Label>
+                            Section
+                        </Form.Label>
+                        <Form.Control
+                            as='select'
+                            value={section}
+                            onChange={handleCategoryChange}
+                        >
+                            <option value=''>Select category</option>
+                            {categories?.map((category) => (
+                                <option key={category._id} data-custom-1={category._id} value={category.category}>
+                                    {category.category}
+                                </option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group> */}
+
+                     {/* <Form.Group controlId='section'>
                         <Form.Label>
                             Section
                         </Form.Label>
@@ -344,25 +355,32 @@ function ProductEditScreen() {
                                 </option>
                             ))}
                         </Form.Control>
-                    </Form.Group>
+                    </Form.Group> */}
 
-                    <Form.Group controlId='subsection'>
-                        <Form.Label>
-                            Subsection
-                        </Form.Label>
-                        <Form.Control
-                            as='select'
-                            value={subsection}
-                            onChange={handleSubsectionChange}
-                        >
-                            <option value=''>Select subsection</option>
-                            {subsections?.map((subsection) => (
-                                <option key={subsection._id} data-custom-3={subsection._id} value={subsection.subsection}>
-                                    {subsection.subsection}
-                                </option>
-                            ))}
-                        </Form.Control>
-                    </Form.Group>
+<Form.Group controlId='subsection'>
+  <Form.Label>
+    Subsection
+  </Form.Label>
+  <Form.Control
+    as='select'
+    value={subsection}
+    onChange={handleSubsectionChange}
+  >
+    <option value=''>Select subsection</option>
+    {cat?.length > 0 && cat[0]?.section?.map((sec) => (
+      <option key={sec._id} data-custom-3={sec._id} value={sec.section}>
+        {sec.section}
+      </option>
+    ))}
+  </Form.Control>
+</Form.Group>
+
+
+
+
+
+
+
 
                     <Form.Group controlId='countInStock' >
                         <Form.Label>

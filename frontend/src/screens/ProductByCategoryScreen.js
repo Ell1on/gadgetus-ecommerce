@@ -19,6 +19,9 @@ function ProductByCategoryScreen({}) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {id} = useParams();
+    const {_id} = useParams();
+    console.log("dasd", id);
+    console.log("DAD", _id);
   
     const productByCategory = useSelector(state => state.productByCategory) 
     const {loading:loadingByCat, error:errorByCat, products} = productByCategory 
@@ -33,7 +36,7 @@ function ProductByCategoryScreen({}) {
 
     return (
       <div>
-        <Sort id={id} />
+        <Sort id={id} _id={_id} />
           {loadingByCat ? (
               <Loader />
           ) : errorByCat ? (
@@ -41,11 +44,11 @@ function ProductByCategoryScreen({}) {
           ) : (
               <Row>
                 <Col xl={3} className='bg-grey' >
-                    <Filters product={products} id={id} />
+                    <Filters product={products} id={id} _id={_id} />
                 </Col>
                   {Array.isArray(products) && products.map(product => (
                       <Col key={product._id}  md={6} lg={4} xl={3}>
-                          <Product product={product} />
+                          <Product product={product} _id={_id} />
                       </Col>
                   ))}
               </Row>

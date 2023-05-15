@@ -13,6 +13,5 @@ urlpatterns = [
 
     path('', views.getOrders, name='orders')
 
-
 ]   
     

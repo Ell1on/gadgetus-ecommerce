@@ -3,21 +3,29 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import {Row, Col, Form, Button ,Hidden } from 'react-bootstrap'
+import {Row, Col, Form, Button ,Hidden, ListGroup } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
 import SearchBox from './../screens/SearchBox';
 import { listProductsBrands, listProductsCategories, listProductByCategoriesDetails } from '../actions/productActions';
 import "../index.css"; // подключаем стили
-
+import { MegaMenu } from 'primereact/megamenu';
+import { CascadeSelect } from 'primereact/cascadeselect';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 function Header() {
 
   const dispatch = useDispatch()
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const navigate = useNavigate()
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectCategory, setSelectedCategory] = useState(null);
+  const [selectSection, setSelectSection] = useState(null);
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
@@ -31,6 +39,9 @@ function Header() {
   const productList = useSelector(state => state.productList) 
   const {loading, error, products} = productList
 
+  // const productCategoryList = useSelector(state => state.productCategoryList) 
+  // const {loadingCats, errorCats, categories} = productCategoryList
+
   console.log(categories);
 
 
@@ -43,56 +54,21 @@ function Header() {
     dispatch(logout())
   }
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    dispatch(listProductByCategoriesDetails({
-      id:category._id,
-      category: category.category
-    }))
+  // const handleCategoryClick = (category) => {
+  //   setSelectedCategory(category);
+  //   dispatch(listProductByCategoriesDetails({
+  //     id:category._id,
+  //     category: category.category
+  //   }))
 
-  };
-  console.log(selectedCategory);
-
-  const catas = { categories: {} };
-products?.map((product) => {
-  const { categories, sections, subsections } = product;
-  if (catas?.categories[categories]) {
-    if (!catas?.categories[categories]?.sections?.includes(sections)) {
-      catas?.categories[categories]?.sections?.push(sections);
-    }
-    if (Array.isArray(subsections)) { // add a check to ensure subsections is an array
-      catas.categories[categories].subsections = [
-        ...new Set([
-          ...catas?.categories[categories]?.subsections,
-          ...subsections
-        ])
-      ];
-    }
-  } else {
-    catas.categories[categories] = {
-      sections: [sections],
-      subsections: Array.isArray(subsections) ? subsections : [] // add a check to ensure subsections is an array
-    };
-  }
-});
+  // };
   
-  // const generateItems = (categories) => {
-  //   const items = [];
-  //   for (const category in categories) {
-  //     const categoryObj = { label: category, items: [] };
-  //     for (const section of categories[category].sections) {
-  //       const sectionObj = { label: section, items: [] };
-  //       for (const subsection of categories[category].subsections) {
-  //         sectionObj.items.push({ label: subsection });
-  //       }
-  //       categoryObj.items.push(sectionObj);
-  //     }
-  //     items.push(categoryObj);
-  //   }
-  //   return items;
-  // }
 
-  // const items = [{ label: 'Catalog', items: [generateItems(catas.categories)] }];
+  function handleCascadeSelectChange(categoryId, sectionId) {
+    const options = { categoryId, sectionId };
+    navigate(`/admin/categories/categorylist/${categoryId}/section/${sectionId}`);
+    dispatch(listProductByCategoriesDetails(options));
+}
 
 
   return (
@@ -104,29 +80,17 @@ products?.map((product) => {
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav " style={{zIndex:99999}}>
-        <Nav className="me-auto">
+        <Nav className="me-auto nav-all">
 
-
-          {/* <NavDropdown title="Catalog" id="basic-nav-dropdown">
-            {categories?.map((category) => (
-              <LinkContainer
-                to={`/admin/categories/categorylist/${category._id}`}
-              >
-                <NavDropdown.Item
-                  key={category._id}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {category.category}
-                </NavDropdown.Item>
-              </LinkContainer>
-            ))}
-          </NavDropdown>
-          <div className="card">
-            <MegaMenu model={items} breakpoint="960px" />
-        </div> */}
-
-
-
+        <NavDropdown className="nav-item dropdown" title="Dropdown">
+          {categories?.map((category) => (
+            <NavDropdown className="nav-item dropend" title={<span style={{color: 'black'}}>{category.category}</span>} id={category.id} key={category.id} onSelect={(eventKey, event) => handleCascadeSelectChange(category._id, eventKey)}>
+              {category?.section?.map((sec) => (
+                <NavDropdown.Item className="dropdown-item" href="#" eventKey={sec._id} key={sec._id}>{sec.section}</NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          ))}
+        </NavDropdown>
 
 
         </Nav>

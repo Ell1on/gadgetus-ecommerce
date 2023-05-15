@@ -59,3 +59,54 @@ h3{
     padding-left: 0;
 }
 
+
+
+/* .catalog-link {
+    padding: 15px;
+    color: white;
+    display: block;
+    transition: all 0.3s;
+
+}
+
+.catalog-link:hover {
+    color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    background: grey;
+    /* box-sizing: border-box; */
+
+/* .catalog-category {
+    position: absolute;
+    left: 0;
+    width: 180px;
+    color: white;
+    z-index: 999999999;
+}
+.nav-all ul li {
+    position: relative;
+    float: left;
+}
+
+.categories-link{
+    padding: 15px;
+    color: white;
+    display: block;
+} */
+
+.dropdown .dropdown-menu {
+    display: none;
+  }
+
+
+@media screen and (min-width: 769px) {
+    .dropend:hover > .dropdown-menu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+    }
+}
+/* .categories-link:hover{
+    background: #000;
+
+} */

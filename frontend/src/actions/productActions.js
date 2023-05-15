@@ -186,6 +186,12 @@ import {
     PRODUCT_BY_SUBSECTION_SUCCESS,
     PRODUCT_BY_SUBSECTION_FAIL,
 
+
+    PRODUCT_CATEGORY_SECTION_REQUEST,
+    PRODUCT_CATEGORY_SECTION_SUCCESS,
+    PRODUCT_CATEGORY_SECTION_FAIL,
+    PRODUCT_CATEGORY_SECTION_RESET,
+
 } from '../constants/productConstants'
 
 import axios from 'axios';
@@ -473,19 +479,19 @@ export const listSubsectionDetails = (id) => async(dispatch) => {
 
 
 
-export const listProductByCategoriesDetails = (cat) => async(dispatch) => {
+export const listProductByCategoriesDetails = (options) => async(dispatch) => {
     try{
-      const { id, category, sort, filter, price } = cat;
-      const queryParams = new URLSearchParams({
-        category: category,
-        sort: sort,
-        filter: JSON.stringify(filter),
-        price: price
-        // price: JSON.stringify(price),
+    //   const { id, _id, category, sort, filter, price } = cat;
+    //   console.log(cat);
+    const queryParams = new URLSearchParams({
+        category: options.category,
+        sort: options.sort,
+        filter: JSON.stringify(options.filter),
+        price: options.price
       }).toString();
-      dispatch({type:PRODUCT_BY_CATEGORY_REQUEST})
+      
       const { data } = await axios.get(
-        `/api/categories/categorylist/${id}/?${queryParams}`
+        `/api/categories/categorylist/${options.categoryId}/section/${options.sectionId}/?${queryParams}`
       )
       dispatch({ type: PRODUCT_BY_CATEGORY_SUCCESS, payload: data })
     }catch(error){
@@ -808,7 +814,7 @@ export const createCategory = () => async (dispatch, getState) => {
     }
 }
 
-export const createSection = () => async (dispatch, getState) => {
+export const createSection = (id, inform) => async (dispatch, getState) => {
     try{
         dispatch({type:PRODUCT_SECTION_REQUEST})
 
@@ -822,10 +828,10 @@ export const createSection = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-    
+
         const {data} = await axios.post(
-            `/api/sections/create/section/`,
-            {},
+            `/api/categories/create/${id}/section/`,
+            inform,
             config
         )
     
@@ -860,7 +866,7 @@ export const createSubsection = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-    
+
         const {data} = await axios.post(
             `/api/subsections/create/subsection/`,
             {},
@@ -1239,9 +1245,9 @@ export const updateSubsection = (subsection) => async (dispatch, getState) => {
     }
 }
 
-export const updateProductInfo = (_id, id, inputValue, inputInfo) => async (dispatch, getState) => {
+export const updateCategorySection = (_id, id, name) => async (dispatch, getState) => {
     try {
-        dispatch({ type: PRODUCT_UPDATE_INFO_REQUEST });
+        dispatch({ type: PRODUCT_CATEGORY_SECTION_REQUEST });
 
         const {
             userLogin: { userInfo },
@@ -1255,20 +1261,20 @@ export const updateProductInfo = (_id, id, inputValue, inputInfo) => async (disp
         };
 
         const { data } = await axios.put(
-            `/api/products/update/${_id}/info/update/${id}/`,
-            {inputValue, inputInfo},
+            `/api/categories/update/${_id}/section/update/${id}/`,
+            {name},
             config,
         );
 
         dispatch({
-            type: PRODUCT_UPDATE_INFO_SUCCESS,
+            type: PRODUCT_CATEGORY_SECTION_SUCCESS,
             payload: data,
         });
 
         dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
-            type: PRODUCT_UPDATE_INFO_FAIL,
+            type: PRODUCT_CATEGORY_SECTION_FAIL,
             payload:
                 error.response && error.response.data.detail
                     ? error.response.data.detail
@@ -1311,6 +1317,44 @@ export const deleteProductInfo = (_id, id,) => async (dispatch, getState) => {
     
     }
 }
+
+export const updateProductInfo = (_id, id, inputValue, inputInfo) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: PRODUCT_UPDATE_INFO_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.put(
+            `/api/products/update/${_id}/info/update/${id}/`,
+            {inputValue, inputInfo},
+            config,
+        );
+
+        dispatch({
+            type: PRODUCT_UPDATE_INFO_SUCCESS,
+            payload: data,
+        });
+
+        dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_UPDATE_INFO_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.data.detail
+                    : error.message,
+        });
+    }
+};
 
 
 export const createProductReview = (id, review) => async (dispatch, getState) => {
@@ -1387,6 +1431,7 @@ export const createInfo = (id, information) => async (dispatch, getState) => {
     
     }
 }
+
 
 
 export const sortProducts = (sort) => async (dispatch) => {
