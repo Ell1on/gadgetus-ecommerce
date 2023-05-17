@@ -43,7 +43,8 @@ import { productListReducers,
     productSetSubsectionReducers,
     productSectionReducers,
     productSubsectionReducers,
-    categoryUpdateSectionReducers
+    categoryUpdateSectionReducers,
+    productRecommendedReducers
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer } from './reducers/userReducers';
@@ -70,6 +71,7 @@ const reducer = combineReducers({
     productReview: productReviewReducers,
     productTopRated: productTopRatedReducers,
     productPopular: productPopularReducers,
+    productRecommended: productRecommendedReducers,
     productTopSelling: productTopSellingReducers,
     productBrand: productBrandReducers,
     productCategory: productCategoryReducers,

@@ -6,6 +6,8 @@ from base.views import category_views as views
 urlpatterns = [
 
     path('', views.getCategories, name="categories"),
+    path('top/', views.getTopCategories, name="top-categpries"),
+
     path('<str:pk>/', views.getCategory, name="category"),
   
     path('create/<int:pk>/section/', views.createSection, name="create-section"),
@@ -16,7 +18,6 @@ urlpatterns = [
     path('update/<str:pk>/', views.updateCategory, name="update-category"),
     path('delete/<str:pk>/', views.deleteCategory, name="delete-category"),
     path('categorylist/<int:pk>/section/<int:pk_alt>/', views.getProductByCategory, name="product-category"),
-    path('top/', views.getTopCategories, name="top-categpries"),
     
 
 ]   

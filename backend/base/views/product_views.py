@@ -335,3 +335,30 @@ def setProductSubsection(request, pk, pk_alt):
 #     serializers = ProductSerializer(products, many=False)
 
 #     return Response(serializers.data)
+
+
+from django.shortcuts import render
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+def recommend_similar_products(pk, top_n=5):
+    products = Product.objects.all()
+    product_descriptions = [product.description for product in products]
+    tfidf = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = tfidf.fit_transform(product_descriptions)
+    similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+    product_index = pk - 1
+    product_similarity_scores = similarity_matrix[product_index]
+    similar_product_indices = product_similarity_scores.argsort()[-top_n-1:-1][::-1]
+    
+    similar_products = [products.filter(_id=index+1).first() for index in similar_product_indices]
+    
+    serializer = ProductSerializer(similar_products, many=True)
+    serialized_products = serializer.data
+    return serialized_products
+
+@api_view(['GET'])
+def recommended_products(request, pk):
+    recommended_products = recommend_similar_products(pk)
+    return Response(recommended_products)

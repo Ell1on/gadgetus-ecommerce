@@ -82,15 +82,39 @@ function Header() {
       <Navbar.Collapse id="responsive-navbar-nav " style={{zIndex:99999}}>
         <Nav className="me-auto nav-all">
 
-        <NavDropdown className="nav-item dropdown" title="Dropdown">
-          {categories?.map((category) => (
-            <NavDropdown className="nav-item dropend" title={<span style={{color: 'black'}}>{category.category}</span>} id={category.id} key={category.id} onSelect={(eventKey, event) => handleCascadeSelectChange(category._id, eventKey)}>
-              {category?.section?.map((sec) => (
-                <NavDropdown.Item className="dropdown-item" href="#" eventKey={sec._id} key={sec._id}>{sec.section}</NavDropdown.Item>
-              ))}
-            </NavDropdown>
-          ))}
-        </NavDropdown>
+
+        <NavDropdown
+  className="nav-item dropdown custom-dropdown border-0"
+  title="Каталог"
+  style={{ border: 'none' }}
+>
+  {categories?.map((category) => (
+    <NavDropdown
+      className="nav-item dropend custom-dropdown border-0"
+      title={
+        <span style={{ color: 'black', width: 300 }}>
+          {category.category}
+        </span>
+      }
+      id={category.id}
+      key={category.id}
+      onSelect={(eventKey, event) =>
+        handleCascadeSelectChange(category._id, eventKey)
+      }
+    >
+      {category?.section?.map((sec) => (
+        <NavDropdown.Item
+          className="dropdown-item border-0"
+          href="#"
+          eventKey={sec._id}
+          key={sec._id}
+        >
+          {sec.section}
+        </NavDropdown.Item>
+      ))}
+    </NavDropdown>
+  ))}
+</NavDropdown>
 
 
         </Nav>

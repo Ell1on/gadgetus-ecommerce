@@ -192,6 +192,11 @@ import {
     PRODUCT_CATEGORY_SECTION_FAIL,
     PRODUCT_CATEGORY_SECTION_RESET,
 
+    PRODUCT_RECOMMENDED_REQUEST,
+    PRODUCT_RECOMMENDED_SUCCESS,
+    PRODUCT_RECOMMENDED_FAIL,
+
+
 } from '../constants/productConstants'
 
 import axios from 'axios';
@@ -340,6 +345,27 @@ export const listPopularProducts = () => async(dispatch) => {
     }catch(error){
         dispatch({
             type: PRODUCT_POPULAR_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const listRecommendedProducts = (id) => async(dispatch) => {
+    try{
+        dispatch({type:PRODUCT_RECOMMENDED_REQUEST})
+        
+        const {data} = await axios.get(`/api/products/${id}/recommendations/`);
+
+        dispatch({
+            type: PRODUCT_RECOMMENDED_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: PRODUCT_RECOMMENDED_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

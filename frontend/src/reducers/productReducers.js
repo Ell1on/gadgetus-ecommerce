@@ -194,6 +194,11 @@ import {
     PRODUCT_CATEGORY_SECTION_FAIL,
     PRODUCT_CATEGORY_SECTION_RESET,
 
+    
+    PRODUCT_RECOMMENDED_REQUEST,
+    PRODUCT_RECOMMENDED_SUCCESS,
+    PRODUCT_RECOMMENDED_FAIL,
+
 
 
 } from '../constants/productConstants';
@@ -749,25 +754,26 @@ export const productUpdateBrandReducers = (state = {brand:{}}, action) => {
     }
 }
 
-export const topCategoriesReducers = (state = {category: []}, action) => {
+
+
+export const topCategoriesReducers = (state = {categories:[]}, action) => {
     switch(action.type){
         case PRODUCT_CATEGORY_TOP_REQUEST:
-            return {loading:true, category: []}
+            return {loading:true, categories:[]}
             
         case PRODUCT_CATEGORY_TOP_SUCCESS:
-            return {loading:false, success:true, category:action.payload}
+            return {loading:false, categories:action.payload}
 
         case PRODUCT_CATEGORY_TOP_FAIL:
             return {loading:false, error:action.payload}
 
-        case PRODUCT_CATEGORY_TOP_RESET:
-            return {}
-    
-
         default:
             return state
+
+
     }
 }
+
 
 export const productUpdateCategoryReducers = (state = {category:{}}, action) => {
     switch(action.type){
@@ -955,6 +961,24 @@ export const productPopularReducers = (state = {products:[]}, action) => {
             return {loading:false, products:action.payload}
 
         case PRODUCT_POPULAR_FAIL:
+            return {loading:false, error:action.payload}
+
+        default:
+            return state
+
+
+    }
+}
+
+export const productRecommendedReducers = (state = {products:[]}, action) => {
+    switch(action.type){
+        case PRODUCT_RECOMMENDED_REQUEST:
+            return {loading:true, products:[]}
+            
+        case PRODUCT_RECOMMENDED_SUCCESS:
+            return {loading:false, products:action.payload}
+
+        case PRODUCT_RECOMMENDED_FAIL:
             return {loading:false, error:action.payload}
 
         default:

@@ -110,3 +110,12 @@ h3{
     background: #000;
 
 } */
+
+.custom-dropdown .dropdown-menu {
+    width: 250px;
+  }
+
+
+.square-card {
+    min-height: 100%;
+}

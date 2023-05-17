@@ -123,11 +123,11 @@ def getProductByCategory(request, pk, pk_alt):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getTopCategories(request, pk):
-    categories = Category.objects.all()
+def getTopCategories(request):
+    categories = Category.objects.all()[:12]  # выбрать первые 10 объектов
     
-    serializers = CategorySerializer(categories, many=True)
-    return Response(serializers.data)
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
 
 
 

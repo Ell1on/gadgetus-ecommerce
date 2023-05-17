@@ -18,16 +18,17 @@ function TopCategoriesScreen() {
     const navigate = useNavigate()
     const {id} = useParams()
     
-    // const topCategories = useSelector(state => state.topCategories)
-    // const {error, loading, categories} = topCategories
+    const topCategories = useSelector(state => state.topCategories)
+    const {error, loading, categories} = topCategories
+    console.log("FAFDF", categories);
 
-    const productCategoryList = useSelector(state => state.productCategoryList) 
-    const {loading:loadingCat, error:errorCat,categories} = productCategoryList
+    // const productCategoryList = useSelector(state => state.productCategoryList) 
+    // const {loading:loadingCat, error:errorCat,categories} = productCategoryList
    
     useEffect(() => {
         dispatch({type:PRODUCT_CATEGORY_TOP_RESET})
         // dispatch(listTopCategories())
-        dispatch(listProductsCategories())
+        dispatch(listTopCategories())
 
         
     }, [ dispatch, navigate,])
@@ -40,9 +41,10 @@ function TopCategoriesScreen() {
     return (
         
   <Row xs={1} md={2} lg={3} xl={6} className="no-gutters">
+    
     {categories?.map((category, index) => (
-      <Col key={category._id} className="mb-4">
-        <Card className="rounded border-0 mx-2">
+      <Col  className="mb-4">
+        <Card className="rounded border-0 mx-2 square-card">
           <Card.Body>
             <LinkContainer to={`/admin/categories/categorylist/${category._id}`}>
               <Card.Title>{category.category}</Card.Title>

@@ -12,6 +12,7 @@ urlpatterns = [
     path('top/', views.getTopProducts, name='top-products'),
     path('popular/', views.getTopReviews, name='popular-products'),
     path('selling/', views.getTopSelling, name='selling-products'),
+    path('<int:pk>/recommendations/', views.recommended_products, name='recommended_products'),
 
 
     path('<str:pk>/', views.getProduct, name="product"),
@@ -28,6 +29,10 @@ urlpatterns = [
 
     path('delete/<str:pk>/', views.deleteProduct, name="product-delete"),
     path('delete/<str:pk>/info/delete/<str:pk_alt>/', views.deleteInfo, name="product-delete"),
+
+
+
+
 
     # path('rated/', views.getSortProdByRating, name="product-rated"),
     # path('highprice/', views.getHighPriceProduct, name="product-highprice"),

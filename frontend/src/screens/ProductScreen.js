@@ -13,6 +13,7 @@ import { Galleria } from 'primereact/galleria';
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css"; 
+import ProductRecommendedCarousel from './ProductRecommendedCarousel';
 
 function ProductScreen({}) {
 
@@ -290,7 +291,16 @@ const thumbnailTemplate = (item) => {
                </ListGroup> 
               </Col>
               </Row>
+
+              <Row className='mt-5 mb-4' >
+                  <Col>
+                    <ProductRecommendedCarousel id={id} className />
+
+                  </Col>
+              </Row>
               <Row>
+
+
                 <Col md={6} >
                   <h4>Reviews</h4>  
                   {product.reviews.length === 0 && <Message variant='info' >No Reviews</Message> }              
