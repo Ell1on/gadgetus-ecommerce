@@ -35,26 +35,26 @@ function ProductByCategoryScreen({}) {
 
 
     return (
-      <div>
-        <Sort id={id} _id={_id} />
-          {loadingByCat ? (
-              <Loader />
-          ) : errorByCat ? (
-              <Message variant='danger'>{errorByCat}</Message>
-          ) : (
-              <Row>
-                <Col xl={3} className='bg-grey' >
-                    <Filters product={products} id={id} _id={_id} />
-                </Col>
-                  {Array.isArray(products) && products.map(product => (
-                      <Col key={product._id}  md={6} lg={4} xl={3}>
-                          <Product product={product} _id={_id} />
-                      </Col>
-                  ))}
-              </Row>
-          )}
-      </div>
-  )
+        <div>
+          <Sort id={id} _id={_id} />
+            {loadingByCat ? (
+                <Loader />
+            ) : errorByCat ? (
+                <Message variant='danger'>{errorByCat}</Message>
+            ) : (
+                <Row>
+                  <Col xl={3} className='bg-grey' >
+                      <Filters product={products} id={id} _id={_id} />
+                  </Col>
+                    {Array.isArray(products) && products.map(product => (
+                        <Col key={product._id}  md={6} lg={4} xl={3}>
+                            <Product product={product} _id={_id} />
+                        </Col>
+                    ))}
+                </Row>
+            )}
+        </div>
+    )
 }
 
 export default ProductByCategoryScreen

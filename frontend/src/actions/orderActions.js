@@ -22,6 +22,11 @@ import {
     ORDER_DELIVERED_FAIL,
     ORDER_DELIVERED_RESET,
 
+    ORDER_PROFILE_REQUEST,
+    ORDER_PROFILE_SUCCESS,
+    ORDER_PROFILE_FAIL,
+    ORDER_PROFILE_RESET,
+
 } from "../constants/orderConstants";
 import { CART_CLEAR_ITEMS } from "../constants/cartConstants";
 
@@ -102,6 +107,45 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }catch(error){
         dispatch({
             type: ORDER_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+
+}
+
+
+export const getOrderProfile = () => async (dispatch, getState) => {
+    try{
+        dispatch({
+            type: ORDER_PROFILE_REQUEST
+        })
+
+        const { 
+            userLogin: {userInfo},
+        } = getState()
+
+        const config = {
+            headers:{
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/orders/myorders/`,
+            config
+        )
+
+        dispatch({
+            type: ORDER_PROFILE_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: ORDER_PROFILE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

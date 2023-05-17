@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from django.contrib.auth.models import User
-from base.models import Product, OrderItem, ShippingAddress, Order
+from base.models import Product, OrderItem, ShippingAddress, Order, ProductImage
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, OrderItemSerializer
 
 from rest_framework import status
@@ -22,6 +22,7 @@ def addOrderItems(request):
         return Response({'detail':'No order Items'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         #Create order
+        print(f"USER: {user}")
 
         order = Order.objects.create(
             user=user,
@@ -41,6 +42,7 @@ def addOrderItems(request):
 
         for i in orderItems:
             product = Product.objects.get(_id=i['product'])
+            productImage = ProductImage.objects.get(_id=i['product'])
 
             item = OrderItem.objects.create(
                 product=product,
@@ -48,7 +50,7 @@ def addOrderItems(request):
                 name=product.name,
                 qty=i['qty'],
                 price=i['price'],
-                image=product.image.url,
+                # image=productImage.image.url,
 
             )
 
@@ -58,6 +60,17 @@ def addOrderItems(request):
 
     serializer  = OrderSerializer(order, many=False) 
 
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getMyOrders(request):
+    
+    user = request.user
+    print(f"USER: {user}")
+    # orders = user.order_set.all()
+    orders = Order.objects.filter(user=user)
+    serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
