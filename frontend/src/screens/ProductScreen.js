@@ -118,7 +118,7 @@ function ProductScreen({}) {
 const itemTemplateWithMagnify = (item) => {
   return (
     
-      <div  style={{ position: 'relative', zIndex:9999 }}>
+      <div  style={{ position: 'relative', zIndex:9989 }}>
       <ImageMagnify {...{
           smallImage: {
               alt: 'Wristwatch by Ted Baker London',
@@ -129,7 +129,7 @@ const itemTemplateWithMagnify = (item) => {
               src: item,
               width: 1200,
               height: 1800,
-              zIndex: 9999
+              zIndex: 9989
 
           }
       }}

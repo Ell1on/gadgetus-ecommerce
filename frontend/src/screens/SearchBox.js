@@ -3,6 +3,8 @@ import { Button, Card, Form, FormControl, Image, InputGroup } from 'react-bootst
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { listSearch } from '../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 
 const SearchBox = () => {
@@ -12,6 +14,7 @@ const SearchBox = () => {
   const inputRef = useRef(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchList = useSelector((state) => state.searchList);
   const { loading, error, products } = searchList;
 
@@ -19,7 +22,7 @@ const SearchBox = () => {
     e.preventDefault();
     if (keyword) {
       dispatch(listSearch(`?keyword=${keyword}`));
-      console.log(products);
+      navigate(`/products/search`);
     }
   };
 
@@ -41,7 +44,8 @@ const SearchBox = () => {
   };
 
   const handleClickOutside = (e) => {
-    const clickedInsideSearchBox = e.target.closest('.search-box-backdrop') !== null;
+    const clickedInsideSearchBox =
+      e.target.closest('.search-box-backdrop') !== null;
     if (!clickedInsideSearchBox) {
       setShowBackdrop(false);
     }
@@ -55,6 +59,17 @@ const SearchBox = () => {
     };
   }, []);
 
+  const handleLinkClick = () => {
+    handleHideBackdrop();
+  };
+
+  const handleInputChange = (e) => {
+    setKeyword(e.target.value);
+    if (e.target.value.trim() !== '') {
+      dispatch(listSearch(`?keyword=${e.target.value}`));
+    }
+  };
+
   return (
     <div
       className={`ps-5 px-5 ${showBackdrop ? 'search-box-backdrop' : ''}`}
@@ -62,38 +77,36 @@ const SearchBox = () => {
     >
       <Form onSubmit={handleSubmit}>
         <InputGroup>
-          <FormControl
-            type="text"
-            placeholder="Поиск по сайту"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            onFocus={handleFocus}
-            onClick={handleFocus}
-            onBlur={handleBlur}
-            ref={inputRef}
-            style={{
-              border: 'none',
-              boxShadow: 'none',
-              borderRadius: showBackdrop ? '4px 0 0 0' : '4px 0 0 4px',
-              zIndex: showBackdrop ? 1 : 'inherit',
-              outline: 'none',
-            }}
-          />
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={handleFocus}
-            style={{
-              borderRadius: showBackdrop ? '0 4px 0 0' : '0 4px 4px 0',
-              zIndex: showBackdrop ? 1 : 'inherit',
-              outline: 'none',
-            }}
-          >
-            Поиск
-          </Button>
+        <FormControl
+          type="text"
+          placeholder="Поиск по сайту"
+          value={keyword}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onClick={handleFocus}
+          onBlur={handleBlur}
+          ref={inputRef}
+          style={{
+            border: 'none',
+            boxShadow: 'none',
+            borderRadius: showBackdrop ? '4px 0 0 0' : '4px 0 0 4px',
+            zIndex: showBackdrop ? 1 : 'inherit',
+            outline: 'none',
+          }}
+        />
+        <Button
+          type="submit"
+          onClick={handleFocus}
+          style={{
+            borderRadius: showBackdrop ? '0 4px 0 0' : '0 4px 4px 0',
+            zIndex: showBackdrop ? 1 : 'inherit',
+            outline: 'none',
+          }}
+        >
+          Поиск
+        </Button>
         </InputGroup>
       </Form>
-
       {showBackdrop && (
         <>
           {/* Dimming effect */}
@@ -106,7 +119,7 @@ const SearchBox = () => {
               right: 0,
               bottom: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              zIndex: 9998,
+              zIndex: 9999,
             }}
             onClick={handleHideBackdrop}
           ></div>
@@ -119,7 +132,8 @@ const SearchBox = () => {
               top: 'calc(100%)',
               left: '48px',
               width: 'calc(100% - 96px)',
-              height: '400px',
+              maxHeight: '400px', // Ограничение высоты контейнера
+              overflowY: 'auto', // Добавление прокрутки, если контент выходит за границы
               backgroundColor: 'white',
               zIndex: 9999,
               display: 'flex',
@@ -130,13 +144,19 @@ const SearchBox = () => {
               borderRadius: '0 0 4px 4px',
             }}
           >
-           {products &&
-              products.slice(0, 9).map((product) => (
+            {products &&
+              products.slice(0, 8).map((product) => (
                 <div key={product.id}>
                   <div>
                     <strong>{product.categories}</strong>
                   </div>
-                  <Link to={`/product/${product._id}`}>
+                  <Link
+                    onClick={() => {
+                      navigate(`/product/${product._id}`);
+                      handleLinkClick();
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <div className="ps-2">
                       <strong>{product.name}</strong>
                     </div>
@@ -151,5 +171,4 @@ const SearchBox = () => {
 };
 
 export default SearchBox;
-
 

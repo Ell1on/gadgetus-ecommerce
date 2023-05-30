@@ -25,6 +25,7 @@ import CategoryListScreen from './screens/CategoryListScreen';
 import BrandEditScreen from './screens/BrandEditScreen';
 import CategoryEditScreen from './screens/CategoryEditScreen';
 import ProductByCategoryScreen from './screens/ProductByCategoryScreen';
+import SearchListScreen from './screens/SearchListScreen';
 
 
 
@@ -32,7 +33,7 @@ const App = () => {
   return (
     <div>
       <Header />
-      <main className="py-3" >
+      <main className="py-3" style={{marginTop : '60px'}} >
         <Container>
           <Routes  >
             <Route exact="true"
@@ -137,6 +138,10 @@ const App = () => {
             <Route 
               path='/admin/categories/categorylist/:id/section/:_id'
               element= {<ProductByCategoryScreen/>} 
+            />
+            <Route 
+              path='/products/search'
+              element= {<SearchListScreen/>} 
             />
 
             {/* <Route 

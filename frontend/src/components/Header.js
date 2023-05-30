@@ -72,8 +72,8 @@ function Header() {
 
 
   return (
-    <header>
-  <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
+    <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999, 'marginBottom': '60px'}}>
+  <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg" >
     <Container >
       <LinkContainer to="/">
         <Navbar.Brand>Gadgetus</Navbar.Brand>
@@ -120,6 +120,8 @@ function Header() {
         </Nav>
         <SearchBox className="flex-grow-1" />
         <Nav>
+
+          
           <LinkContainer to="/cart">
             <Nav.Link className="d-flex align-items-center">
               <i className="fas fa-shopping-cart me-1"></i>{" "}

@@ -18,11 +18,11 @@ function Sort(props) {
     const selectedSort = event.target.value
     console.log(selectedSort)
     setSort(selectedSort)
-    dispatch(listProductByCategoriesDetails({categoryId:props.id, sectionId:props._id, sort:selectedSort}))
+    dispatch(listProductByCategoriesDetails({categoryId:props.id || null, sectionId:props._id || null, sort:selectedSort}))
   }
 
   useEffect(() => {
-    dispatch(listProductByCategoriesDetails({categoryId:props.id, sectionId:props._id}))
+    dispatch(listProductByCategoriesDetails({categoryId:props.id || null, sectionId:props._id || null}))
 
   }, [dispatch])
 
