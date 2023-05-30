@@ -83,7 +83,7 @@ function PlaceOrderScreen() {
                                 {cart.cartItems.map((item, index) => (
                                     <ListGroup.Item key={index} >
                                         <Row>
-                                            <Col md={1} sm={2} >
+                                            <Col md={2} sm={2} >
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
 

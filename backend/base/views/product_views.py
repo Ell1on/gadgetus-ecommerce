@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from base.models import Product, Review, ProductInfo, OrderItem, Brand, Category, ProductImage
 
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, BrandSerializer, CategorySerializer
-
 from rest_framework import status
 
 @api_view(['GET'])
@@ -344,7 +343,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def recommend_similar_products(pk, top_n=5):
     products = Product.objects.all()
     product_descriptions = [product.description for product in products]
-    tfidf = TfidfVectorizer(stop_words='english')
+    tfidf = TfidfVectorizer(stop_words='english') 
     tfidf_matrix = tfidf.fit_transform(product_descriptions)
     similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
 

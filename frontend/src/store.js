@@ -44,7 +44,8 @@ import { productListReducers,
     productSectionReducers,
     productSubsectionReducers,
     categoryUpdateSectionReducers,
-    productRecommendedReducers
+    productRecommendedReducers,
+    searchListReducers
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer } from './reducers/userReducers';
@@ -60,6 +61,7 @@ import { favoritesReducer } from './reducers/favoritesReducer';
 
 
 const reducer = combineReducers({
+    searchList: searchListReducers,
     productList: productListReducers,
     productDetails: productDetailsReducers,
     productDelete: productDeleteReducers,
@@ -89,7 +91,6 @@ const reducer = combineReducers({
     topCategories:topCategoriesReducers,
     categoryUpdateSection: categoryUpdateSectionReducers,
 
-
     productSectionList: productSectionListReducers,
     productSubsectionList: productSubsectionListReducers,
 
@@ -103,7 +104,6 @@ const reducer = combineReducers({
     subsectionDetails: subsectionDetailsReducers,
     productSetSection: productSetSectionReducers,
     productSetSubsection: productSetSubsectionReducers,
-
 
     cart: cartReducer,
     favorites: favoritesReducer,
@@ -120,8 +120,6 @@ const reducer = combineReducers({
     orderList: orderListReducer,
     orderDelivered: orderDeliveredReducer,
     orderProfile: orderProfileReducer,
-    
-
  })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')?
@@ -148,7 +146,6 @@ const initialState = {
         favoritesItems: favoritesItemsFromStorage
     },
     userLogin: {userInfo: userInfoFromStorage},
-    
     
 }
 

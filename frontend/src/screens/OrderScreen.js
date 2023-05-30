@@ -102,7 +102,7 @@ function OrderScreen() {
                                     <ListGroup.Item key={index} >
                                         <Row>
                                             <Col md={1} sm={2} >
-                                                <Image src={item.image} alt={item.name} fluid rounded />
+                                                <Image src={item.image} fluid rounded />
                                             </Col>
 
                                             <Col>

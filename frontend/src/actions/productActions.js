@@ -1,4 +1,8 @@
 import {
+    SEARCH_LIST_REQUEST, 
+    SEARCH_LIST_SUCCESS, 
+    SEARCH_LIST_FAIL,
+
     PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
     PRODUCT_LIST_FAIL,
@@ -224,6 +228,26 @@ export const listProducts = (keyword = '') => async(dispatch) => {
     }
 }
 
+export const listSearch = (keyword = '') => async(dispatch) => {
+    try{
+        dispatch({type:SEARCH_LIST_REQUEST})
+
+        const {data} = await axios.get(`/api/products/search/${keyword}`);
+
+        dispatch({
+            type: SEARCH_LIST_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: SEARCH_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
 
 export const listProductsBrands = () => async(dispatch) => {
     try{

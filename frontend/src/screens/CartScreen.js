@@ -47,7 +47,7 @@ function CartScreen() {
             {cartItems.map(item => (
               <ListGroup.Item key={item.product}>
                 <Row>
-                  <Col md={2} >
+                  <Col md={3} >
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>

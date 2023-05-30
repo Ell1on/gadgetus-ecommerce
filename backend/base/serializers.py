@@ -85,10 +85,6 @@ class CategorySerializer(serializers.ModelSerializer):
         serializers = SectionSerializer(section, many=True)
         return serializers.data
         # return {'id': section._id, 'section':section.section} if section else '' 
-
-
-    
-
  
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -139,7 +135,6 @@ class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only=True)
     ShippingAddress = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
-
 
     class Meta:
         model = Order

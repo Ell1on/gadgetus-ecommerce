@@ -56,19 +56,6 @@ def updateCategory(request, pk):
     return Response(serializers.data)
 
 
-
-# @api_view(['GET'])
-# def getProductByCategory(request, pk):
-#     data = request.data
-#     print(f"DATA {data}")
-#     print(f"PK : {pk}")
-#     category = Category.objects.get(_id=pk)
-#     print(f"CATEGORY : {category}")
-#     name = category.category
-#     print(f"NAME : {name}")
-#     product = Product.objects.filter(categories=name)
-#     serializers = ProductSerializer(product, many=True)
-#     return Response(serializers.data)
 @api_view(['GET'])
 def getProductByCategory(request, pk, pk_alt):
     category = Category.objects.get(_id=pk)

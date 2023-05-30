@@ -42,7 +42,7 @@ function FormInput(props) {
     dispatch({type:PRODUCT_UPDATE_INFO_RESET})
 
 
-}, [dispatch, successUpdateInfo])
+}, [dispatch, successUpdateInfo, successDeleteInfo])
 
 const deleteHandler = () => {
   if(window.confirm('Are you sure you want to delete this Info?')){

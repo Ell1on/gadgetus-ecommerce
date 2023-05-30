@@ -25,6 +25,8 @@ function ProductEditScreen() {
     const [subsection, setSubsection] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
+    const [createInfoClicked, setCreateInfoClicked] = useState(false);
+
     // const [uploading, setUploading] = useState(false)
 
     const navigate = useNavigate()
@@ -64,33 +66,73 @@ function ProductEditScreen() {
 
     useEffect(() => {
         if (successProductInfo) {
-          dispatch({ type: PRODUCT_CREATE_INFO_RESET })
+          dispatch({ type: PRODUCT_CREATE_INFO_RESET });
+          dispatch(listProductsDetails(id));
         }
-        if (successUpdate) {
-          dispatch({ type: PRODUCT_UPDATE_RESET })
-          navigate('/admin/productlist')
-        }
-        if (!product || !product.name || product._id !== Number(id)) {
-            dispatch(listProductsDetails(id))
-            dispatch(listProductsBrands())
-            dispatch(listProductsCategories())
-            dispatch(listProductsSections())
-            dispatch(listProductsSubsections())
 
-        } else {
-          setName(product.name)
-          setPrice(product.price)
-          setImage(product.image)
-          setCountInStock(product.countInStock)
-          setDescription(product.description)
-          setBrand(product.brands)
-          setCategory(product.categories)
-        //   setSection(product.sections)
-        //   setSubsection(product.subsections)
-          
+        if (successUpdate) {
+          dispatch({ type: PRODUCT_UPDATE_RESET });
+          navigate('/admin/productlist');
         }
-      }, [dispatch, navigate, successProductInfo, successUpdate, product, id, successUpdateInfo, successDeleteInfo])
+
+        if (!product || !product.name || product._id !== Number(id)) {
+          dispatch(listProductsDetails(id));
+          dispatch(listProductsBrands());
+          dispatch(listProductsCategories());
+          dispatch(listProductsSections());
+          dispatch(listProductsSubsections());
+        } else {
+          // Check if specific fields need to be updated or not
+          const shouldUpdateName = name === '' && product.name;
+          const shouldUpdatePrice = price === 0 && product.price;
+          const shouldUpdateImage = image.length === 0 && product.image;
+          const shouldUpdateCountInStock = countInStock === 0 && product.countInStock;
+          const shouldUpdateDescription = description === '' && product.description;
+          const shouldUpdateBrand = brand === '' && product.brands;
+          const shouldUpdateCategory = category === '' && product.categories;
       
+          if (shouldUpdateName) {
+            setName(product.name);
+          }
+          if (shouldUpdatePrice) {
+            setPrice(product.price);
+          }
+          if (shouldUpdateImage) {
+            setImage(product.image);
+          }
+          if (shouldUpdateCountInStock) {
+            setCountInStock(product.countInStock);
+          }
+          if (shouldUpdateDescription) {
+            setDescription(product.description);
+          }
+          if (shouldUpdateBrand) {
+            setBrand(product.brands);
+          }
+          if (shouldUpdateCategory) {
+            setCategory(product.categories);
+          }
+
+
+        }
+      }, [
+        dispatch,
+        navigate,
+        successProductInfo,
+        successUpdate,
+        successUpdateInfo,
+        successDeleteInfo,
+        product,
+        id,
+        name,
+        price,
+        image,
+        countInStock,
+        description,
+        brand,
+        category,
+        createInfoClicked
+      ]);
     const submitHandler = (e) => {
         e.preventDefault();
         
@@ -110,8 +152,9 @@ function ProductEditScreen() {
     console.log("AMOGUS", category);
 
     const submitInfoHandler = (e) => {
-        e.preventDefault(id)
+        e.preventDefault()
         dispatch(createInfo(id))
+        setCreateInfoClicked(true);
     }
 
     const uploadFileHandler = async (e) => {
@@ -176,21 +219,6 @@ function ProductEditScreen() {
         console.log(selectedCategory)
         console.log(product);
     };
-
-    // const handleSectionChange = (event) => {
-    //     const selectedSection = event.target.value;
-    //     const selectedId = event.target.selectedOptions[0].getAttribute("data-custom-2");
-    //     console.log(section);
-    //     console.log(id);
-    //     dispatch(setProductSection({
-    //         _id:id,
-    //         id: selectedId,
-    //         section: selectedSection
-    //     }))
-    //     console.log(selectedId)
-    //     console.log(selectedSection)
-    //     console.log(product);
-    // };
 
     const handleSubsectionChange = (event) => {
         const selectedSubsection = event.target.value;
@@ -321,42 +349,6 @@ function ProductEditScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    {/* <Form.Group controlId='section'>
-                        <Form.Label>
-                            Section
-                        </Form.Label>
-                        <Form.Control
-                            as='select'
-                            value={section}
-                            onChange={handleCategoryChange}
-                        >
-                            <option value=''>Select category</option>
-                            {categories?.map((category) => (
-                                <option key={category._id} data-custom-1={category._id} value={category.category}>
-                                    {category.category}
-                                </option>
-                            ))}
-                        </Form.Control>
-                    </Form.Group> */}
-
-                     {/* <Form.Group controlId='section'>
-                        <Form.Label>
-                            Section
-                        </Form.Label>
-                        <Form.Control
-                            as='select'
-                            value={section}
-                            onChange={handleSectionChange}
-                        >
-                            <option value=''>Select section</option>
-                            {sections?.map((section) => (
-                                <option key={section._id} data-custom-2={section._id} value={section.section}>
-                                    {section.section}
-                                </option>
-                            ))}
-                        </Form.Control>
-                    </Form.Group> */}
-
 <Form.Group controlId='subsection'>
   <Form.Label>
     Subsection
@@ -422,6 +414,7 @@ function ProductEditScreen() {
 
                         variant='primary'
                         className="form-floating mt-3 "
+                        
                         onClick={submitInfoHandler}
                     >
                         <i className='fa fa-plus' ></i> Create info

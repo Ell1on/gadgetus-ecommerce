@@ -18,6 +18,7 @@ function CategoryEditScreen() {
     const {id} = useParams();     
     const [name, setName] = useState('')
     const [sec, setSec] = useState('')
+    
  
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -42,6 +43,7 @@ function CategoryEditScreen() {
         if(successUpdate) {
             dispatch({type:PRODUCT_CATEGORY_UPDATE_RESET})
             navigate('/admin/categories')
+        
         } else {
 
             if (cats && cats._id === Number(id)) {
@@ -52,7 +54,7 @@ function CategoryEditScreen() {
                 }
             }
         }
-    }, [id, dispatch, navigate, successUpdate, category, createdSection]);
+    }, [id, dispatch, navigate, successUpdate, category, createdSection, successSection]);
 
     console.log(category)
 
@@ -66,14 +68,16 @@ function CategoryEditScreen() {
     }
 
     const submitSectionHandler = (e) => {
-        e.preventDefault()
-        dispatch(createSection(id))
+        e.preventDefault();
+        dispatch(createSection(id));
         console.log(id);
-    }
-
-    const handleChange = (e) => {
         setSec(e.target.value)
-    }
+
+      };
+
+    // const handleChange = (e) => {
+    //     setSec(e.target.value)
+    // }
 
     return (
         <div>
@@ -113,7 +117,8 @@ function CategoryEditScreen() {
                             Create Section
                         </Button> 
 
-
+                        {loadingSection && <Loader /> }
+                        {errorSection && <Message variant='danger'>{errorUpdate}</Message> }
 
                         <div>
                             {cats?.section != 0? <h5>Название Секции</h5> : ''}
