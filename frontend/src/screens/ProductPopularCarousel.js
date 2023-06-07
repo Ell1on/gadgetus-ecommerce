@@ -63,7 +63,8 @@ function ProductPopularCarousel() {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
         >
-                {products?.map(product => (
+                {Array.isArray(products) && products.map(product => (
+
                     <div key={product._id}  >
                         <Product product={product} />
                     </div>

@@ -81,7 +81,7 @@ function HomeScreen() {
               
             >   
             
-              {products?.map((product, index) => (
+              {Array.isArray(products) && products?.map((product, index) => (
                   <div key={product._id}>
                       <Product len={products.length}  product={product} index={index}  />
                   </div>

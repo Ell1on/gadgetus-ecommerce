@@ -22,7 +22,9 @@ function ProductCarousel() {
         ? <Message variant='danger'>{error}</Message>
         : (
             <Carousel pause='hover' className='bg-dark mx-2 ' >
-                {products.map(product => (
+
+
+                {Array.isArray(products) && products.map(product => (
                     <Carousel.Item key={product._id} >
                         <Link to={`/product/${product._id}`} className='text-decoration-none ' >
                             <Carousel.Caption className='' >

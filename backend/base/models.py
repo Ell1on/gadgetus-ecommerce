@@ -31,7 +31,6 @@ class Brand(models.Model):
     brand = models.CharField(max_length=200)
     categories = models.ManyToManyField('Category', related_name='brands', default=None)
     _id = models.AutoField(primary_key=True, editable=False)
-    # product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.brand

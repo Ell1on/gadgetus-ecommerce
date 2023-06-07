@@ -88,7 +88,7 @@ function Header() {
   title="Каталог"
   style={{ border: 'none' }}
 >
-  {categories?.map((category) => (
+{Array.isArray(categories) && categories.map((category) => (
     <NavDropdown
       className="nav-item dropend custom-dropdown border-0"
       title={

@@ -42,7 +42,8 @@ function TopCategoriesScreen() {
         
   <Row xs={1} md={2} lg={3} xl={6} className="no-gutters">
     
-    {categories?.map((category, index) => (
+    {Array.isArray(categories) && categories.map((category, index) => (
+
       <Col  className="mb-4">
         <Card className="rounded border-0 mx-2 square-card">
           <Card.Body>
