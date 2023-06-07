@@ -30,7 +30,7 @@ function ProductCarousel() {
                             <Carousel.Caption className='' >
                                 
                             </Carousel.Caption>
-                            <h4 className='text-center pt-4 text-white' >{product.name} (${product.price}) </h4>
+                            <h4 className='text-center pt-4 text-white' >{product.name}  </h4>
                             <Image src={product?.images?.length > 0 ? product?.images[0].image : ''} alt={product.name} fluid />
                             
                         </Link>

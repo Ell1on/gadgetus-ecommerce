@@ -55,7 +55,7 @@ function BrandEditScreen() {
     return (
         <div>
             <Link to='/admin/brands'>
-                Go Back
+                Назад
             </Link>
 
             <FormContainer>
@@ -67,7 +67,7 @@ function BrandEditScreen() {
                     <Form onSubmit={submitHandler} className="d-grid gap-2">
                         <Form.Group controlId='brand'>
                             <Form.Label>
-                                Brand 
+                                Бренд 
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -76,9 +76,9 @@ function BrandEditScreen() {
                                     type="text" 
                                     className="form-control" 
                                     id="floatingInput" 
-                                    placeholder="Enter Brand"
+                                    placeholder="Введите бренд"
                                 />
-                                <label className="opacity-50" htmlFor="floatingInput">Enter Brand</label>
+                                <label className="opacity-50" htmlFor="floatingInput">Введите бренд</label>
                             </div>
                         </Form.Group>
                     
@@ -87,7 +87,7 @@ function BrandEditScreen() {
                             variant='primary'
                             className="form-floating mt-3 btn btn-lg"
                         >
-                            Update
+                            Обновить
                         </Button> 
                     </Form>    
                 ) }

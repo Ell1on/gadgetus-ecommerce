@@ -43,7 +43,7 @@ function ProductPopularCarousel() {
 
     return (
         <div>        
-        <h1>Popular Products</h1>
+        <h1>Популярные товары</h1>
         {loading ? <Loader/>   
             : error ? <Message variant='danger' >{error}</Message>
             :

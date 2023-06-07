@@ -50,7 +50,7 @@ function UserEditScreen() {
   return (
     <div>
         <Link to='/admin/userlist'>
-            Go Back
+            Назад
         </Link>
 
          <FormContainer   >
@@ -63,7 +63,7 @@ function UserEditScreen() {
 
                     <Form.Group controlId='name' >
                         <Form.Label>
-                        Name
+                        Имя
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -74,13 +74,13 @@ function UserEditScreen() {
                                 id="floatingInput" 
                                 placeholder="name@example.com"
                             />
-                            <label className="opacity-50">Enter Name</label>
+                            <label className="opacity-50">Введите имя</label>
                         </div>
                     </Form.Group>
 
                     <Form.Group controlId='email' >
                         <Form.Label>
-                            Email Address
+                            Email адрес
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -92,7 +92,7 @@ function UserEditScreen() {
                                 id="floatingInput" 
                                 placeholder="name@example.com"
                             />
-                            <label className="opacity-50">Enter Email</label>
+                            <label className="opacity-50">Введите Email</label>
                         </div>
                     </Form.Group>
 
@@ -111,7 +111,7 @@ function UserEditScreen() {
                                         
                                         />
                                 <label className="form-check-label">
-                                    Is Admin
+                                    Администратор?
                                 </label>
                             </div>
                         </fieldset>
@@ -123,7 +123,7 @@ function UserEditScreen() {
                         variant='primary'
                         className="form-floating mt-3 btn btn-lg"
                     >
-                        Update
+                        Обновить
                     </Button> 
                 </Form>    
             ) }

@@ -65,12 +65,12 @@ function CategoryListScreens() {
     <div>
         <Row className="align-items-center" >
             <Col>
-                <h1>Categories</h1>
+                <h1>Категории</h1>
             </Col>
 
             <Col className='text-end' >
                 <Button className='my-3' onClick={createCategoryHandler} >
-                    <i className='fa fa-plus' ></i> Create Category
+                    <i className='fa fa-plus' ></i> Создать категорию
                 </Button>
             </Col>
         </Row>
@@ -89,7 +89,7 @@ function CategoryListScreens() {
                             <tr>
                                 <th>ID</th>
 
-                                <th>CATEGORIES</th>
+                                <th>Категории</th>
                                 <th></th>
                             </tr>
                         </thead>

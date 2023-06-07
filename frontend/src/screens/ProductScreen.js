@@ -146,7 +146,7 @@ const thumbnailTemplate = (item) => {
 
   return (
     <div>
-        <Link to="/" className="btn btn-light my-3 ">Go Back</Link>
+        <Link to="/" className="btn btn-light my-3 ">Назад</Link>
         
         {loading ? 
           <Loader />
@@ -174,7 +174,7 @@ const thumbnailTemplate = (item) => {
                     </ListGroup.Item>
 
                     <ListGroup.Item className='border-0'>
-                      Price: ${product.price}
+                      Цена: Р{product.price}
                     </ListGroup.Item>
 
                     
@@ -185,10 +185,10 @@ const thumbnailTemplate = (item) => {
                       <ListGroup.Item className='border-0'>
                         <Row>
                           <Col>
-                            Price:
+                            Цена:
                           </Col>
                           <Col>
-                            <strong>${product.price}</strong>
+                            <strong>Р{product.price}</strong>
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -196,7 +196,7 @@ const thumbnailTemplate = (item) => {
                       <ListGroup.Item varian="flush" className='border-0' >
                         <Row>
                           <Col>
-                            Status:
+                            Статус:
                           </Col>
                           <Col>
                             <strong>{product.countInStock > 0 ? 'In Stock' : 'Out' }</strong>
@@ -208,7 +208,7 @@ const thumbnailTemplate = (item) => {
                         <ListGroup.Item varian="flush" className='border-0' >
                           <Row>
                             <Col>
-                              Qty
+                              Количество
                             </Col>
                             <Col xs="auto" className='my-1' >
                               <Form.Control
@@ -239,7 +239,7 @@ const thumbnailTemplate = (item) => {
                           className="btn btn-lg btn-dark" 
                           disabled={product.countInStock == 0} 
                           type="button" >
-                            Add to Cart
+                            Добавить в корзину
                         </Button>
                       </ListGroup.Item>
 
@@ -248,7 +248,7 @@ const thumbnailTemplate = (item) => {
                           onClick={addToFavoritesHandler}
                           className="btn btn-lg btn-dark"  
                           type="button" >
-                            Add to Favorites
+                            Добавиь в избранное
                         </Button>
                       </ListGroup.Item>
 
@@ -261,7 +261,7 @@ const thumbnailTemplate = (item) => {
                 <Col>
                 <ListGroup className="border-0">
                   <ListGroup.Item className="border-0">
-                      Description: {product.description}
+                       {product.description}
                     </ListGroup.Item>
                 </ListGroup>
                 </Col>
@@ -302,7 +302,7 @@ const thumbnailTemplate = (item) => {
 
 
                 <Col md={6} >
-                  <h4>Reviews</h4>  
+                  <h4>Отзывы</h4>  
                   {product.reviews.length === 0 && <Message variant='info' >No Reviews</Message> }              
                   <ListGroup variant='flush' >
                     {product.reviews.map((review) => (
@@ -315,7 +315,7 @@ const thumbnailTemplate = (item) => {
                     ))}
 
                     <ListGroup.Item>
-                      <h4>Write a review</h4>
+                      <h4>Написать отзыв</h4>
 
                       {loadingProductReview && <Loader /> }
                       {successProductReview && <Message variant='success' >Review Submitted</Message> }
@@ -325,25 +325,25 @@ const thumbnailTemplate = (item) => {
                       {userInfo ? (
                         <Form onSubmit={submitHandler} >
                           <Form.Group  >
-                            <Form.Label>
-                              Rating
+                            <Form.Label> 
+                              Рейтинг
                             </Form.Label>
                             <Form.Control
                               as='select'
                               value={rating}
                               onChange={(e) => setRating(e.target.value)}
                             >
-                              <option value="">Select...</option>
-                              <option value="1">1 - Poor</option>
-                              <option value="2">2 - Fair</option>
-                              <option value="3">3 - Good</option>
-                              <option value="4">4 - Very Good</option>
-                              <option value="5">5 - Excellent</option>
+                              <option value="">Выбрать...</option>
+                              <option value="1">1 - Ужасно</option>
+                              <option value="2">2 - Плохо</option>
+                              <option value="3">3 - Нормально</option>
+                              <option value="4">4 - Хорошо</option>
+                              <option value="5">5 - Отлично</option>
                             </Form.Control>
                           </Form.Group> 
 
                           <Form.Group controlId='comment' >
-                            <Form.Label>Review</Form.Label>
+                            <Form.Label>Отзывы</Form.Label>
                             <Form.Control as='textarea' row='6' value={comment} onChange={(e) => setComment(e.target.value)} >
 
                             </Form.Control>
@@ -355,12 +355,12 @@ const thumbnailTemplate = (item) => {
                             variant='primary'
                             className='btn btn-primary mt-2'
                           >
-                            Submit
+                            Отправить
                           </Button>
 
                         </Form>
                       ) : (
-                        <Message variant='info' >Please <Link to='/login'>login</Link>to write a review </Message>
+                        <Message variant='info' >Пожалуйста <Link to='/login'>Авторизуйтесь</Link>чтобы написать отзыв</Message>
                       )}
                     </ListGroup.Item>
                   </ListGroup>

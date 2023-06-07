@@ -44,7 +44,7 @@ function RegisterScreen() {
 
   return (
     <FormContainer>
-            <h1>Create an account</h1>
+            <h1>Создать аккаунт</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger' >{error}</Message>}
             {loading && <Loader/>}
@@ -52,7 +52,7 @@ function RegisterScreen() {
 
                 <Form.Group controlId='name' >
                     <Form.Label>
-                       Name
+                       Имя
                     </Form.Label>
                     <div className="form-floating">
                         <input 
@@ -64,13 +64,13 @@ function RegisterScreen() {
                             id="floatingInput" 
                             placeholder="name@example.com"
                         />
-                        <label className="opacity-50" for="floatingInput">Enter Name</label>
+                        <label className="opacity-50" for="floatingInput">Введите имя</label>
                     </div>
                 </Form.Group>
 
                 <Form.Group controlId='email' >
                     <Form.Label>
-                        Email Address
+                        Email адрес
                     </Form.Label>
                     <div className="form-floating">
                         <input 
@@ -82,13 +82,13 @@ function RegisterScreen() {
                             id="floatingInput" 
                             placeholder="name@example.com"
                         />
-                        <label className="opacity-50" for="floatingInput">Enter Email</label>
+                        <label className="opacity-50" for="floatingInput">Email адрес</label>
                     </div>
                 </Form.Group>
 
                 <Form.Group controlId='password' >
                     <Form.Label>
-                        Password
+                        Пароль
                     </Form.Label>
                     <div className="form-floating">
                         <input 
@@ -100,13 +100,13 @@ function RegisterScreen() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <label className="opacity-50" for="floatingPassword">Enter Password</label>
+                        <label className="opacity-50" for="floatingPassword">Введите пароль</label>
                     </div>
                 </Form.Group>
 
                 <Form.Group controlId='passwordConfirm' >
                     <Form.Label>
-                        Confirm Password
+                        Подтвердите пароль
                     </Form.Label>
                     <div className="form-floating">
                         <input 
@@ -118,7 +118,7 @@ function RegisterScreen() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
-                        <label className="opacity-50" for="floatingPassword">Confirm Password</label>
+                        <label className="opacity-50" for="floatingPassword">Подтвердите пароль</label>
                     </div>
                 </Form.Group>
                 
@@ -127,13 +127,13 @@ function RegisterScreen() {
                     variant='primary'
                     className="form-floating mt-3 btn btn-lg"
                 >
-                    Register
+                    Регистрация
                 </Button> 
 
             </Form>   
             <Row className="py-3" >
                 <Col>
-                    Already Registered? <Link to={redirect ? `/login?redirect=${redirect}` : `/login`} >Sign In</Link>
+                    Уже есть аккаунт? <Link to={redirect ? `/login?redirect=${redirect}` : `/login`} >Авторизуйтесь</Link>
                 </Col>
             </Row>  
 

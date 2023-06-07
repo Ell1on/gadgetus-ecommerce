@@ -14,13 +14,13 @@ function CheckoutSteps({step1, step2, step3, step4}) {
             {step1 ? (
                 <LinkContainer to='/login' >
                     <Nav.Link>
-                        Login
+                        Авторизоваться
                     </Nav.Link>
 
                 </LinkContainer>
             ) : (
                 <Nav.Link disabled >
-                    Login
+                    Авторизоваться
                 </Nav.Link>
             )}
             
@@ -30,13 +30,13 @@ function CheckoutSteps({step1, step2, step3, step4}) {
             {step2 ? (
                 <LinkContainer to='/shipping' >
                     <Nav.Link>
-                        Shipping
+                        Адрес доставки
                     </Nav.Link>
 
                 </LinkContainer>
             ) : (
                 <Nav.Link disabled >
-                    Shipping
+                    Адрес доставки
                 </Nav.Link>
             )}
             
@@ -46,13 +46,13 @@ function CheckoutSteps({step1, step2, step3, step4}) {
             {step3 ? (
                 <LinkContainer to='/payment' >
                     <Nav.Link>
-                        Payment
+                        Способ оплаты
                     </Nav.Link>
 
                 </LinkContainer>
             ) : (
                 <Nav.Link disabled >
-                    Payment
+                    Способ оплаты
                 </Nav.Link>
             )}
             
@@ -62,12 +62,12 @@ function CheckoutSteps({step1, step2, step3, step4}) {
             {step4 ? (
                 <LinkContainer to='/placeorder' >
                     <Nav.Link>
-                        Place Order
+                        Размещение заказа
                     </Nav.Link>
                 </LinkContainer>
             ) : (
                 <Nav.Link disabled >
-                    Place Order
+                    Размещение заказа
                 </Nav.Link>
             )}
             

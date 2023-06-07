@@ -42,7 +42,7 @@ def addOrderItems(request):
 
         for i in orderItems:
             product = Product.objects.get(_id=i['product'])
-            productImage = ProductImage.objects.get(_id=i['product'])
+            # productImage = ProductImage.objects.get(_id=i['product'])
 
             item = OrderItem.objects.create(
                 product=product,

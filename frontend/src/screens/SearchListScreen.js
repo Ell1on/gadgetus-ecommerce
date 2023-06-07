@@ -41,9 +41,9 @@ function SearchListScreen({}) {
                 <Message variant='danger'>{error}</Message>
             ) : (
                 <Row>
-                  <Col xl={3} className='bg-grey' >
+                  {/* <Col xl={3} className='bg-grey' >
                       <Filters product={products} />
-                  </Col>
+                  </Col> */}
                     {Array.isArray(products) && products.map(product => (
                         <Col key={product._id}  md={6} lg={4} xl={3}>
                             <Product product={product} _id={_id} />

@@ -94,7 +94,7 @@ function CategoryEditScreen() {
                     <Form onSubmit={submitHandler} className="d-grid gap-2">
                         <Form.Group controlId='brand'>
                             <Form.Label>
-                                Category 
+                                Категории 
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -103,9 +103,9 @@ function CategoryEditScreen() {
                                     type="text" 
                                     className="form-control" 
                                     id="floatingInput" 
-                                    placeholder="Enter Category"
+                                    placeholder="Введите название категории"
                                 />
-                                <label className="opacity-50" htmlFor="floatingInput">Enter Category</label>
+                                <label className="opacity-50" htmlFor="floatingInput">Введите название категории</label>
                             </div>
                         </Form.Group>
 
@@ -114,7 +114,7 @@ function CategoryEditScreen() {
                             className="form-floating mt-3 btn btn-lg"
                             onClick={submitSectionHandler}
                         >
-                            Create Section
+                            Создать категорию
                         </Button> 
 
                         {loadingSection && <Loader /> }
@@ -134,7 +134,7 @@ function CategoryEditScreen() {
                             variant='primary'
                             className="form-floating mt-3 btn btn-lg"
                         >
-                            Update
+                            Обновить
                         </Button> 
                     </Form>    
                 ) }

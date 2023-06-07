@@ -100,7 +100,7 @@ function ProfileScreen() {
       {activeTab === 'profile' && (
         <Col md={6} >
             <div> 
-                <h2>User Profile</h2>
+                <h2>Профиль пользователя</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger' >{error}</Message>}
                 {loading && <Loader/>}
@@ -108,7 +108,7 @@ function ProfileScreen() {
 
                     <Form.Group controlId='name' >
                         <Form.Label>
-                            Name
+                            Имя
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -120,13 +120,13 @@ function ProfileScreen() {
                                     id="floatingInput" 
                                     placeholder="name@example.com"
                                 />
-                                <label className="opacity-50" for="floatingInput">Enter Name</label>
+                                <label className="opacity-50" for="floatingInput">Введите имя</label>
                             </div>
                         </Form.Group>
 
                         <Form.Group controlId='email' >
                             <Form.Label>
-                                Email Address
+                                Email адрес
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -137,13 +137,13 @@ function ProfileScreen() {
                                     id="floatingInput" 
                                     placeholder="name@example.com"
                                 />
-                                <label className="opacity-50" for="floatingInput">Enter Email</label>
+                                <label className="opacity-50" for="floatingInput">Введите Email</label>
                             </div>
                         </Form.Group>
 
                         <Form.Group controlId='password' >
                             <Form.Label>
-                                Password
+                                Пароль
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -154,13 +154,13 @@ function ProfileScreen() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <label className="opacity-50" for="floatingPassword">Enter Password</label>
+                                <label className="opacity-50" for="floatingPassword">Введите пароль</label>
                             </div>
                         </Form.Group>
 
                         <Form.Group controlId='passwordConfirm' >
                             <Form.Label>
-                                Confirm Password
+                                Подтвердите пароль
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -171,7 +171,7 @@ function ProfileScreen() {
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
-                                <label className="opacity-50" for="floatingPassword">Confirm Password</label>
+                                <label className="opacity-50" for="floatingPassword">Подтвердите пароль</label>
                             </div>
                         </Form.Group>
                         
@@ -180,7 +180,7 @@ function ProfileScreen() {
                             variant='primary'
                             className="form-floating mt-3 btn btn-lg"
                         >
-                            Update
+                            Обновить
                         </Button> 
 
                     </Form> 
@@ -189,16 +189,16 @@ function ProfileScreen() {
       )}
       {activeTab === 'orders' && (
         <Col md={9}>
-          <h2>My Orders</h2>
+          <h2>Мои заказы</h2>
           
             <Table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Paid</th>
-                        <th>Delivered</th>
+                        <th>Даты</th>
+                        <th>Сумма</th>
+                        <th>Статус оплаты</th>
+                        <th>Статус доставки</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -213,7 +213,7 @@ function ProfileScreen() {
                             <td>
                                 <LinkContainer to={`/order/${order._id}`} > 
                                     <Button className='btn-sm' > 
-                                        Details
+                                        Детали
                                     </Button>
                                 </LinkContainer>
                             </td>

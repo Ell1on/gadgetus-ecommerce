@@ -49,19 +49,19 @@ function OrderScreen() {
   ) : (
 
     <div>
-        <h1>Order: {order._id}</h1>
+        <h1>Заказ: {order._id}</h1>
         <Row>
             <Col md={8} >
                 <ListGroup variant='flush' >
                     <ListGroup.Item>
-                        <h2>Shipping</h2>
+                        <h2>Адрес</h2>
 
-                        <p> <strong>Name:</strong> {order.user.name} </p>
+                        <p> <strong>Имя:</strong> {order.user.name} </p>
                         <p> <strong>Email:</strong> <a href={`mailto:${order.user.email}`}>{order.user.email}</a>  </p>
 
                         <p>
                             
-                            <strong>Shipping: </strong>
+                            <strong>Адрес: </strong>
                             {order.ShippingAddress.address},{order.ShippingAddress.city},
                             {'  '}
                             {order.ShippingAddress.postalCode},
@@ -70,32 +70,32 @@ function OrderScreen() {
                         </p>
 
                         {order.isDelivered ? (
-                            <Message variant='success' >Delivered on {order.deliveredAt} </Message>
-                        ) : (<Message variant='warning' >Not Delivered</Message>
+                            <Message variant='success' >Доставлено {order.deliveredAt} </Message>
+                        ) : (<Message variant='warning' >Еще в пути</Message>
                         )}
 
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        <h2>Payment Method</h2>
+                        <h2>Способ оплаты</h2>
 
                         <p>
-                            <strong>Payment Method: </strong>
+                            <strong>Способ оплаты: </strong>
                            {order.paymentMethod}
                             
                         </p>
  
                         {order.isPaid ? (
-                            <Message variant='success' >Paid on {order.paidAt} </Message>
-                        ) : (<Message variant='warning' >Not Paid</Message>
+                            <Message variant='success' >Оплачено {order.paidAt} </Message>
+                        ) : (<Message variant='warning' >Не оплачено</Message>
                         )}
 
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        <h2>Order Items</h2>
+                        <h2>Заказанные товары</h2>
                         {order.orderItems.length === 0 ? <Message variant='info' >
-                            Order is empty
+                            Нет заказанных товаров
                         </Message> : (
                             <ListGroup variant='flush' >
                                 {order.orderItems.map((item, index) => (
@@ -130,16 +130,16 @@ function OrderScreen() {
                 <Card className='card border-light mb-3'  >
                     <ListGroup   >
                         <ListGroup.Item className='card-header' >
-                            <h2>Order Summary</h2>   
+                            <h2>Сумма заказа</h2>   
                         </ListGroup.Item>
 
                         <ListGroup.Item  >
                             <Row>
                                 <Col  >
-                                    Item:
+                                    Товары:
                                 </Col>
                                 <Col  >
-                                    ${order.itemsPrice}
+                                    Р{order.itemsPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -147,21 +147,10 @@ function OrderScreen() {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    Shipping:
+                                    Адрес:
                                 </Col>
                                 <Col>
-                                    ${order.shippingPrice}
-                                </Col>
-                            </Row>   
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>
-                                    Tax:
-                                </Col>
-                                <Col>
-                                    ${order.taxPrice}
+                                    Р{order.shippingPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -169,10 +158,21 @@ function OrderScreen() {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    Total:
+                                    Доставка:
                                 </Col>
                                 <Col>
-                                    ${order.totalPrice}
+                                    Р{order.taxPrice}
+                                </Col>
+                            </Row>   
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Row>
+                                <Col>
+                                    Сумма заказа:
+                                </Col>
+                                <Col>
+                                    Р{order.totalPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -185,7 +185,7 @@ function OrderScreen() {
                                 className='btn'
                                 onClick={deliverHandler}
                             > 
-                                Mark As Deliver
+                                Отметить как доставлено
                             </Button>
                         </ListGroup.Item>
                     ) }

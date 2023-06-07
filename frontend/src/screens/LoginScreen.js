@@ -33,14 +33,14 @@ function LoginScreen() {
 
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <h1>Авторизация</h1>
             {error && <Message variant='danger' >{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler} className="d-grid gap-2">
 
                 <Form.Group controlId='email' >
                     <Form.Label>
-                        Email Address
+                        Email адрес
                     </Form.Label>
                     {/* <Form.Control 
                         type='email' 
@@ -58,13 +58,13 @@ function LoginScreen() {
                             id="floatingInput" 
                             placeholder="name@example.com"
                         />
-                        <label className="opacity-50" for="floatingInput">Enter Email</label>
+                        <label className="opacity-50" for="floatingInput">Введите Email</label>
                     </div>
                 </Form.Group>
 
                 <Form.Group controlId='password' >
                     <Form.Label>
-                        Password
+                        Пароль
                     </Form.Label>
                     {/* <Form.Control 
                         type='password' 
@@ -82,7 +82,7 @@ function LoginScreen() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <label className="opacity-50" for="floatingPassword">Enter Password</label>
+                        <label className="opacity-50" for="floatingPassword">Введите пароль</label>
                     </div>
                 </Form.Group>
                 <Button
@@ -90,12 +90,12 @@ function LoginScreen() {
                     variant='primary'
                     className="form-floating mt-3 btn btn-lg"
                 >
-                    Sign In
+                    Авторизоваться
                 </Button>
             </Form>
             <Row className="py-3" >
                 <Col>
-                    New Customer? <Link to={redirect ? `/register?redirect=${redirect}` : `/register`} >Register</Link>
+                    Еще нет аккаунта? <Link to={redirect ? `/register?redirect=${redirect}` : `/register`} >Регистрация</Link>
                 </Col>
             </Row>    
         </FormContainer>

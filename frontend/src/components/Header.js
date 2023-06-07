@@ -83,37 +83,40 @@ function Header() {
         <Nav className="me-auto nav-all">
 
 
-        <NavDropdown
+       <NavDropdown 
   className="nav-item dropdown custom-dropdown border-0"
   title="Каталог"
-  style={{ border: 'none' }}
+  style={{ border: 'none',}}
 >
-{Array.isArray(categories) && categories.map((category) => (
-    <NavDropdown
-      className="nav-item dropend custom-dropdown border-0"
-      title={
-        <span style={{ color: 'black', width: 300 }}>
-          {category.category}
-        </span>
-      }
-      id={category.id}
-      key={category.id}
-      onSelect={(eventKey, event) =>
-        handleCascadeSelectChange(category._id, eventKey)
-      }
-    >
-      {category?.section?.map((sec) => (
-        <NavDropdown.Item
-          className="dropdown-item border-0"
-          href="#"
-          eventKey={sec._id}
-          key={sec._id}
+  <div style={{ whiteSpace: 'nowrap', }}>
+    {Array.isArray(categories) &&
+      categories.map((category) => (
+        <NavDropdown
+          className="nav-item dropend custom-dropdown border-0"
+          title={
+            <span style={{ color: 'black', width: 300 }}>
+              {category.category}
+            </span>
+          }
+          id={category.id}
+          key={category.id}
+          onSelect={(eventKey, event) =>
+            handleCascadeSelectChange(category._id, eventKey)
+          }
         >
-          {sec.section}
-        </NavDropdown.Item>
+          {category?.section?.map((sec) => (
+            <NavDropdown.Item
+              className="dropdown-item border-0"
+              href="#"
+              eventKey={sec._id}
+              key={sec._id}
+            >
+              {sec.section}
+            </NavDropdown.Item>
+          ))}
+        </NavDropdown>
       ))}
-    </NavDropdown>
-  ))}
+  </div>
 </NavDropdown>
 
 
@@ -125,54 +128,49 @@ function Header() {
           <LinkContainer to="/cart">
             <Nav.Link className="d-flex align-items-center">
               <i className="fas fa-shopping-cart me-1"></i>{" "}
-              <div className="">Cart</div>
+              <div className="">Корзина</div>
             </Nav.Link>
           </LinkContainer>
           
           <LinkContainer to="/favorites">
             <Nav.Link className="d-flex align-items-center">
               <i className="fa-solid fa-heart me-1"></i>{" "}
-              <div className="">Favorites</div>
+              <div className="">Избранное</div>
             </Nav.Link>
           </LinkContainer>
           
           {userInfo ? (
             <NavDropdown title={userInfo.name} id="username">
               <LinkContainer to="/profile">
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item>Профиль</NavDropdown.Item>
               </LinkContainer>
-              <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={logoutHandler}>Выйти</NavDropdown.Item>
             </NavDropdown>
           ) : (
             <LinkContainer to="/login">
               <Nav.Link>
-                <i className="fas fa-user me-2"></i>Login
+                <i className="fas fa-user me-2"></i>Авторизация
               </Nav.Link>
             </LinkContainer>
           )}
           {userInfo && userInfo.isAdmin && (
             <NavDropdown title="Admin" id="adminmenue">
               <LinkContainer to="/admin/userlist">
-                <NavDropdown.Item>Users</NavDropdown.Item>
+                <NavDropdown.Item>Пользователи</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/admin/productlist">
-                <NavDropdown.Item>Products</NavDropdown.Item>
+                <NavDropdown.Item>Товары</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/admin/orderlist">
-                <NavDropdown.Item>Orders</NavDropdown.Item>
+                <NavDropdown.Item>Заказы</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/admin/brands">
-                <NavDropdown.Item>Brands</NavDropdown.Item>
+                <NavDropdown.Item>Бренды</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/admin/categories">
-                <NavDropdown.Item>Categories</NavDropdown.Item>
+                <NavDropdown.Item>Категории</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="/admin/sections">
-                <NavDropdown.Item>Sections</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/admin/subsections">
-                <NavDropdown.Item>Subsections</NavDropdown.Item>
-              </LinkContainer>
+             
             </NavDropdown>
           )}
         </Nav>

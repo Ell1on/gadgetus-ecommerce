@@ -73,12 +73,12 @@ function ProductListScreens() {
     <div>
         <Row className="align-items-center" >
             <Col>
-                <h1>Brands</h1>
+                <h1>Бренды</h1>
             </Col>
 
             <Col className='text-end' >
                 <Button className='my-3' onClick={createBrandHandler} >
-                    <i className='fa fa-plus' ></i> Create Brand
+                    <i className='fa fa-plus' ></i> Создать бренд
                 </Button>
             </Col>
         </Row>
@@ -100,7 +100,7 @@ function ProductListScreens() {
                             <tr>
                                 <th>ID</th>
 
-                                <th>BRAND</th>
+                                <th>Бренд</th>
                                 <th></th>
                             </tr>
                         </thead>

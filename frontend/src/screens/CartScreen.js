@@ -36,10 +36,10 @@ function CartScreen() {
   return (
     <Row>
        <Col md={8}>
-        <h1>Shopping Cart</h1>
+        <h1>Корзина</h1>
         {cartItems.length === 0 ? (
           <Message variant='info' >
-             Your cart is empty <Link to='/'>Go Back</Link>
+             Ваша корзина пуста <Link to='/'>Назад</Link>
 
           </Message>
         ) : (
@@ -110,7 +110,7 @@ function CartScreen() {
               disabled={cartItems.length === 0}
               onClick={checkoutHandler}
             >
-              PROCCED TO CHECKOUT
+              Перейти к оплате 
 
             </Button>
           </ListGroup.Item>

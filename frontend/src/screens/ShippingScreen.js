@@ -33,12 +33,12 @@ function ShippingScreen() {
   return (
     <FormContainer>
         <CheckoutSteps step1 step2 />
-        <h2>Shipping</h2>
+        <h2>Адрес</h2>
         <Form  onSubmit={submitHandler} className="d-grid gap-2" sm='gap-4' >
 
             <Form.Group controlId='address'  >
                 <Form.Label>
-                    Address
+                    Адрес
                 </Form.Label>
                 <div className="form-floating">
                     <input 
@@ -50,13 +50,13 @@ function ShippingScreen() {
                         id="floatingInput" 
                         placeholder="name@example.com"
                     />
-                    <label className="opacity-50" for="floatingInput">Enter City</label>
+                    <label className="opacity-50" for="floatingInput">Введите город</label>
                 </div>
             </Form.Group>
 
             <Form.Group controlId='city'  >
                 <Form.Label>
-                    City
+                    Город
                 </Form.Label>
                 <div className="form-floating">
                     <input 
@@ -68,13 +68,13 @@ function ShippingScreen() {
                         id="floatingInput" 
                         placeholder="name@example.com"
                     />
-                    <label className="opacity-50" for="floatingInput">Enter Address</label>
+                    <label className="opacity-50" for="floatingInput">Введите адрес</label>
                 </div>
             </Form.Group>
 
             <Form.Group controlId='postalCode'  >
                 <Form.Label>
-                    Postal Code
+                    Почтовый индекс
                 </Form.Label>
                 <div className="form-floating">
                     <input 
@@ -86,13 +86,13 @@ function ShippingScreen() {
                         id="floatingInput" 
                         placeholder="name@example.com"
                     />
-                    <label className="opacity-50" for="floatingInput">Enter Postal Code</label>
+                    <label className="opacity-50" for="floatingInput">Введите почтовый индекс</label>
                 </div>
             </Form.Group>
 
             <Form.Group controlId='country' className='mb-1'  >
                 <Form.Label>
-                    Country
+                    Страна
                 </Form.Label>
                 <div className="form-floating">
                     <input 
@@ -104,13 +104,13 @@ function ShippingScreen() {
                         id="floatingInput" 
                         placeholder="name@example.com"
                     />
-                    <label className="opacity-50" for="floatingInput">Enter Country</label>
+                    <label className="opacity-50" for="floatingInput">Введите страну</label>
                 </div>
             </Form.Group>
 
             <Button type='submit' variant='primary'
                                 className="form-floating btn btn-lg">
-                Continue
+                Продолжить
             </Button>
 
         </Form>

@@ -31,7 +31,7 @@ function Sort(props) {
     <Form.Group controlId='sort border-0'>
       <Form.Label className='mr-2 border-0'></Form.Label>
       <Form.Control className='d-inline w-auto border-0' as='select' value={sort} onChange={handleSortChange}>
-        <option value=''>Select Sort</option>
+        <option value=''>Способ сортировки</option>
         <i class="fa-light fa-caret-up fa-rotate-180"></i>
         {sortOptions.map(option => (
           <option key={option.value} value={option.value}>

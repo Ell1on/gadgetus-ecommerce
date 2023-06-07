@@ -61,7 +61,7 @@ function SubsectionEditScreen() {
             </Link>
 
             <FormContainer>
-                <h1>Edit Subsection</h1>
+                <h1>Изменить подкатегорию</h1>
                 {loadingUpdate && <Loader /> }
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message> }
 
@@ -69,7 +69,7 @@ function SubsectionEditScreen() {
                     <Form onSubmit={submitHandler} className="d-grid gap-2">
                         <Form.Group controlId='brand'>
                             <Form.Label>
-                                Subsection 
+                                Подкатегория 
                             </Form.Label>
                             <div className="form-floating">
                                 <input 
@@ -80,7 +80,7 @@ function SubsectionEditScreen() {
                                     id="floatingInput" 
                                     placeholder="Enter Brand"
                                 />
-                                <label className="opacity-50" htmlFor="floatingInput">Enter Subsection</label>
+                                <label className="opacity-50" htmlFor="floatingInput">Введите подкатегорию</label>
                             </div>
                         </Form.Group>
                     
@@ -89,7 +89,7 @@ function SubsectionEditScreen() {
                             variant='primary'
                             className="form-floating mt-3 btn btn-lg"
                         >
-                            Update
+                            Обновить
                         </Button> 
                     </Form>    
                 ) }

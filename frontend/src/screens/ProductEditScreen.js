@@ -251,7 +251,7 @@ function ProductEditScreen() {
 
                     <Form.Group controlId='name' >
                         <Form.Label>
-                        Name
+                        Название
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -263,12 +263,12 @@ function ProductEditScreen() {
                                 id="floatingInput" 
                                 placeholder="name@example.com"
                             />
-                            <label className="opacity-50">Enter Name</label>
+                            <label className="opacity-50">Введите название</label>
                         </div>
                     </Form.Group>
                     <Form.Group controlId='price' >
                         <Form.Label>
-                        price
+                        Цена
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -280,12 +280,12 @@ function ProductEditScreen() {
                                 id="floatingInput" 
                                 placeholder=""
                             />
-                            <label className="opacity-50">Enter Price</label>
+                            <label className="opacity-50">Введите цену</label>
                         </div>
                     </Form.Group>
                     <Form.Group controlId='image' >
                         <Form.Label>
-                            Images
+                            Изображения
                         </Form.Label> 
                         <div className="form-floating">
                             <input 
@@ -298,7 +298,7 @@ function ProductEditScreen() {
                             placeholder=""
                             multiple
                             />
-                            <label className="opacity-50">Enter Images</label>
+                            <label className="opacity-50">Загрузите изображения</label>
                         </div>
                         <div className="form-group">
                             <input 
@@ -315,7 +315,7 @@ function ProductEditScreen() {
 
                     <Form.Group controlId='brand'>
                         <Form.Label>
-                            Brand
+                            Бренды
                         </Form.Label>
                         <Form.Control
                             as='select'
@@ -333,14 +333,14 @@ function ProductEditScreen() {
 
                     <Form.Group controlId='category'>
                         <Form.Label>
-                            Category
+                            Категория
                         </Form.Label>
                         <Form.Control
                             as='select'
                             value={category}
                             onChange={handleCategoryChange}
                         >
-                            <option value=''>Select category</option>
+                            <option value=''>Выберите категорию</option>
                             {categories?.map((category) => (
                                 <option key={category._id} data-custom-1={category._id} value={category.category}>
                                     {category.category}
@@ -351,14 +351,14 @@ function ProductEditScreen() {
 
 <Form.Group controlId='subsection'>
   <Form.Label>
-    Subsection
+    Подкатегория
   </Form.Label>
   <Form.Control
     as='select'
     value={subsection}
     onChange={handleSubsectionChange}
   >
-    <option value=''>Select subsection</option>
+    <option value=''>Выберите подкатегорию</option>
     {cat?.length > 0 && cat[0]?.section?.map((sec) => (
       <option key={sec._id} data-custom-3={sec._id} value={sec.section}>
         {sec.section}
@@ -376,7 +376,7 @@ function ProductEditScreen() {
 
                     <Form.Group controlId='countInStock' >
                         <Form.Label>
-                        Stock
+                        Наличие
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -387,13 +387,13 @@ function ProductEditScreen() {
                                 id="floatingInput" 
                                 placeholder=""
                             />
-                            <label className="opacity-50">Enter Stock</label>
+                            <label className="opacity-50">Выберите количество</label>
                         </div>
                     </Form.Group>
 
                     <Form.Group controlId='description' >
                         <Form.Label>
-                        Description
+                        Описание
                         </Form.Label>
                         <div className="form-floating">
                             <input 
@@ -404,7 +404,7 @@ function ProductEditScreen() {
                                 id="floatingInput" 
                                 placeholder=""
                             />
-                            <label className="opacity-50">Description</label>
+                            <label className="opacity-50">Описание</label>
                         </div>
                     </Form.Group>
                     {loadingProductInfo && <Loader /> }
@@ -417,7 +417,7 @@ function ProductEditScreen() {
                         
                         onClick={submitInfoHandler}
                     >
-                        <i className='fa fa-plus' ></i> Create info
+                        <i className='fa fa-plus' ></i> Создать Характеристику
                     </Button> 
                     <Row>
                         <Col lg={4} >
@@ -442,7 +442,7 @@ function ProductEditScreen() {
                         variant='primary'
                         className="form-floating mt-3 btn btn-lg"
                     >
-                        Update
+                        Обновить
                     </Button> 
                 </Form>    
             ) }

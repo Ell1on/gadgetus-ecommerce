@@ -61,12 +61,12 @@ function ProductListScreens() {
     <div>
         <Row className="align-items-center" >
             <Col>
-                <h1>Products</h1>
+                <h1>Товары</h1>
             </Col>
 
             <Col className='text-end' >
                 <Button className='my-3' onClick={createProductHandler} >
-                    <i className='fa fa-plus' ></i> Create Product
+                    <i className='fa fa-plus' ></i> Новый товар
                 </Button>
             </Col>
         </Row>
@@ -87,12 +87,11 @@ function ProductListScreens() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>PRICE</th>
-                                <th>CATEGORY</th>
-                                <th>SECTION</th>
-                                <th>SUBSECTION</th>
-                                <th>BRAND</th>
+                                <th>Название</th>
+                                <th>Цена</th>
+                                <th>Категория</th>
+                                <th>Подкатегория</th>
+                                <th>Бренд</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -104,7 +103,7 @@ function ProductListScreens() {
                                 <td>{product.name}</td>
                                 <td>${product.price}</td>
                                 <td>{product?.categories}</td>
-                                <td>{product?.sections}</td>
+                                {/* <td>{product?.sections}</td> */}
                                 <td>{product?.subsections}</td>
                                 <td>{product?.brands}</td>
 

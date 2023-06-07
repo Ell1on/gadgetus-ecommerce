@@ -33,7 +33,7 @@ function PaymentScreen() {
         <Form onSubmit={submitHandler} >
             <Form.Group>
                 <Form.Label as='legend' >
-                    Select Method
+                    Выберите метод
                     <Col>
                         <Form.Check 
                             type='radio' 
@@ -51,7 +51,7 @@ function PaymentScreen() {
             </Form.Group>
 
             <Button type='submit' variant='primary' >
-                Continue
+                Продолжить
             </Button>
 
         </Form>

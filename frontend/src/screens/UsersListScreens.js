@@ -54,9 +54,9 @@ function UsersListScreens() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
+                                <th>Имя</th>
                                 <th>EMAIL</th>
-                                <th>ADMIN</th>
+                                <th>Администратор</th>
                                 <th></th>
                             </tr>
                         </thead>

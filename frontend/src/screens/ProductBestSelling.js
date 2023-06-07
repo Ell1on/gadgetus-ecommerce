@@ -43,7 +43,7 @@ function ProductBestSelling() {
 
     return (
         <div>        
-        <h1>Top Selling Products</h1>
+        <h1>Хит продаж</h1>
         {loading ? <Loader/>   
             : error ? <Message variant='danger' >{error}</Message>
             :

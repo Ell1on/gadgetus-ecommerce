@@ -52,10 +52,10 @@ function PlaceOrderScreen() {
             <Col md={8} >
                 <ListGroup variant='flush' >
                     <ListGroup.Item>
-                        <h2>Shipping</h2>
+                        <h2>Адрес</h2>
 
                         <p>
-                            <strong>Shipping: </strong>
+                            <strong>Адрес: </strong>
                             {cart.shippingAddress.address},{cart.shippingAddress.city},
                             {'  '}
                             {cart.shippingAddress.postalCode},
@@ -65,19 +65,19 @@ function PlaceOrderScreen() {
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        <h2>Payment Method</h2>
+                        <h2>Способ оплаты</h2>
 
                         <p>
-                            <strong>Payment Method: </strong>
+                            <strong>Способ оплаты: </strong>
                            {cart.paymentMethod}
                             
                         </p>
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        <h2>Order Items</h2>
+                        <h2>Товары</h2>
                         {cart.cartItems.length === 0 ? <Message variant='info' >
-                            Your cart is empty
+                            Нет товаров
                         </Message> : (
                             <ListGroup variant='flush' >
                                 {cart.cartItems.map((item, index) => (
@@ -112,16 +112,16 @@ function PlaceOrderScreen() {
                 <Card className='card border-light mb-3'  >
                     <ListGroup   >
                         <ListGroup.Item className='card-header' >
-                            <h2>Order Summary</h2>   
+                            <h2>Сумма заказа</h2>   
                         </ListGroup.Item>
 
                         <ListGroup.Item  >
                             <Row>
                                 <Col  >
-                                    Item:
+                                    Товары:
                                 </Col>
                                 <Col  >
-                                    ${cart.itemsPrice}
+                                    Р{cart.itemsPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -129,21 +129,10 @@ function PlaceOrderScreen() {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    Shipping:
+                                    Адрес:
                                 </Col>
                                 <Col>
-                                    ${cart.shippingPrice}
-                                </Col>
-                            </Row>   
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>
-                                    Tax:
-                                </Col>
-                                <Col>
-                                    ${cart.taxPrice}
+                                    Р{cart.shippingPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -151,10 +140,21 @@ function PlaceOrderScreen() {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    Total:
+                                    Доставка:
                                 </Col>
                                 <Col>
-                                    ${cart.totalPrice}
+                                    Р{cart.taxPrice}
+                                </Col>
+                            </Row>   
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Row>
+                                <Col>
+                                    Сумма заказа:
+                                </Col>
+                                <Col>
+                                    Р{cart.totalPrice}
                                 </Col>
                             </Row>   
                         </ListGroup.Item>
@@ -171,7 +171,7 @@ function PlaceOrderScreen() {
                                 disabled={cart.cartItems === 0}
                                 onClick={placeOrder}
                             >
-                                Place Order
+                                Разместить заказ
                             </Button>
                         </ListGroup.Item>
 
