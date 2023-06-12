@@ -94,20 +94,11 @@ def updateProduct(request, pk):
     data = request.data
     print(data)
     product = Product.objects.get(_id=pk)
-
     product.name = data['name']
     product.price = data['price']
-    # product.brand = data['brand']
-    # product.category = data['category']
     product.countInStock = data['countInStock']
-    
     product.description = data['description']
-    # product.info.title=data['title']
-    # product.info.information=data['information']
-
     product.save()
-
-
     serializers = ProductSerializer(product, many=False)
 
     return Response(serializers.data)
@@ -152,23 +143,16 @@ def createProductReview(request, pk):
     user = request.user
     product = Product.objects.get(_id=pk)
     data = request.data
-
-    #1 - review already exists
+    #1 - Отзыв уже есть
     alreadyExists = product.review_set.filter(user=user).exists()
-
     if alreadyExists:
-        content = {'detail':'Product already reviewed'}
+        content = {'Продробнее':'Отзыв уже был оставлен'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
-
-    #2 - No rating or 0
-
+    #2 - Нет рейтинга или 0
     elif data['rating'] == 0:
-        content = {'detail':'please select a rating'}
+        content = {'Подробнее':'Выберите рейтинг'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
-
-
-    #3 - Create review
-
+    #3 - Создать отзыв
     else:
         review = Review.objects.create(
             user=user,
@@ -176,12 +160,10 @@ def createProductReview(request, pk):
             name=user.first_name,
             rating=data['rating'],
             comment=data['comment'],
-
         )
 
         reviews = product.review_set.all()
         product.numReviews = len(reviews)
-
         total = 0
         for i in reviews:
             total += i.rating
@@ -189,7 +171,7 @@ def createProductReview(request, pk):
         product.rating = total / len(reviews)
         product.save()
 
-        return Response('Review Added')
+        return Response('Отзыв добавлен')
 
 @api_view(['POST'])
 def createInfo(request, pk):
@@ -217,9 +199,7 @@ def updateProductInfo(request, pk, pk_alt):
     info.title = new_title
     info.information = new_info
     info.save()
-    # order.isDelivered = True
-    # order.deliveredAt = datetime.now()
-    # order.save()
+
 
     
     return Response('info was added')
@@ -291,73 +271,28 @@ def setProductSubsection(request, pk, pk_alt):
     return Response(serializers.data)
 
 
+# from django.shortcuts import render
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.metrics.pairwise import cosine_similarity
 
-# @api_view(['GET'])
-# def getSortProdByRating(request):
-#     products = Product.objects.order_by('-rating')
-#     serializers = ProductSerializer(products, many=True)
-#     return Response(serializers.data)
+# def recommend_similar_products(pk, top_n=5):
+#     products = Product.objects.all()
+#     product_descriptions = [product.description for product in products]
+#     tfidf = TfidfVectorizer(stop_words='english') 
+#     tfidf_matrix = tfidf.fit_transform(product_descriptions)
+#     similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
-# @api_view(['GET'])
-# def getHighPriceProduct(request):
-#     products = Product.objects.order_by('price')
-#     serializers = ProductSerializer(products, many=True)
-#     return Response(serializers.data)
-
-# @api_view(['GET'])
-# def getLowPriceProduct(request):
-#     products = Product.objects.order_by('-price')
-#     serializers = ProductSerializer(products, many=True)
-#     return Response(serializers.data)
-
-# @api_view(['GET'])
-# def getSortProdByComment(request):
-#     products = Product.objects.order_by('numReviews')
-#     serializers = ProductSerializer(products, many=True)
-#     return Response(serializers.data)
-
-# @api_view(['GET'])
-# def sort_products(request):
-#     sort = request.data
-#     print(f"sort: {sort}")
-#     if sort == 'reviews':
-#         products = Product.objects.all().order_by('-rating')
-#     elif sort == 'high_price':
-#         products = Product.objects.all().order_by('-price')
-#     elif sort == 'low_price':
-#         products = Product.objects.all().order_by('price')
-#     elif sort == 'num_reviews':
-#         products = Product.objects.all().order_by('-num_reviews')
-#     else:
-#         products = Product.objects.all()
-#     # data = {'products': list(products.values())}
-#     serializers = ProductSerializer(products, many=False)
-
-#     return Response(serializers.data)
-
-
-from django.shortcuts import render
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
-def recommend_similar_products(pk, top_n=5):
-    products = Product.objects.all()
-    product_descriptions = [product.description for product in products]
-    tfidf = TfidfVectorizer(stop_words='english') 
-    tfidf_matrix = tfidf.fit_transform(product_descriptions)
-    similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
-    product_index = pk - 1
-    product_similarity_scores = similarity_matrix[product_index]
-    similar_product_indices = product_similarity_scores.argsort()[-top_n-1:-1][::-1]
+#     product_index = pk - 1
+#     product_similarity_scores = similarity_matrix[product_index]
+#     similar_product_indices = product_similarity_scores.argsort()[-top_n-1:-1][::-1]
     
-    similar_products = [products.filter(_id=index+1).first() for index in similar_product_indices]
+#     similar_products = [products.filter(_id=index+1).first() for index in similar_product_indices]
     
-    serializer = ProductSerializer(similar_products, many=True)
-    serialized_products = serializer.data
-    return serialized_products
+#     serializer = ProductSerializer(similar_products, many=True)
+#     serialized_products = serializer.data
+#     return serialized_products
 
-@api_view(['GET'])
-def recommended_products(request, pk):
-    recommended_products = recommend_similar_products(pk)
-    return Response(recommended_products)
+# @api_view(['GET'])
+# def recommended_products(request, pk):
+#     recommended_products = recommend_similar_products(pk)
+#     return Response(recommended_products)

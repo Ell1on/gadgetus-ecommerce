@@ -59,42 +59,32 @@ def updateCategory(request, pk):
 @api_view(['GET'])
 def getProductByCategory(request, pk, pk_alt):
     category = Category.objects.get(_id=pk)
-   
     section = Section.objects.get(_id=pk_alt)
     print(f"PKALT: {section}")
     sort = request.GET.get('sort')
     filters = request.GET.get('filter')
     price = request.GET.get('price')
-
     price_list = price.split(',') if price else []
     if len(price_list) < 2:
         # присваиваем значения по умолчанию, если отсутствует одно или оба значения
         min_price, max_price = 0, float('inf')
     else:
         min_price, max_price = map(float, price_list)
-
     prods = Product.objects.filter(categories=category, subsections=section, price__gte=min_price, price__lte=max_price)
-
     if filters:
         try:
             filters_list = json.loads(filters)
-
             for f in filters_list:
                 prods = prods.filter(productinfo__title=f['title'], productinfo__information=f['info'])
-                #  price__gte=f['minPrice'], price__lte=f['maxPrice'])
-
             serializer = ProductSerializer(prods, many=True)
             print(f"filters{filters_list}")
-
             return Response(serializer.data)
-
         except json.JSONDecodeError as e:
             # Обработка ошибки декодирования JSON
             print(f"Ошибка декодирования JSON: {e}")
             filters_list = []
     else:
         filters_list = []
-
     if sort == 'reviews':
         products = prods.order_by('-rating')
     elif sort == 'highPrice':
@@ -105,7 +95,6 @@ def getProductByCategory(request, pk, pk_alt):
         products = prods.order_by('-numReviews')
     else:
         products = prods
-
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
